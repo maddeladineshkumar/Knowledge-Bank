@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinesh Kumar | Academic Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --primary-color: #006064; /* Deep Teal */
+            --secondary-color: #546e7a; /* Muted Blue-Grey */
+            --accent-color: #fbc02d; /* Mustard Gold */
+            --bg-light: #fdfaf6; /* Cream Background */
+            --bg-white: #ffffff;
+            --text-dark: #263238;
+            --border-color: #e0e0e0;
+            --nav-height: 70px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            padding-top: var(--nav-height);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            box-sizing: border-box;
+        }
+
+        .site-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            margin-left: 5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTAINER & ANIMATIONS --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .page-content.active {
+            display: block;
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-card {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- ABOUT ME SECTION --- */
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .profile-image-wrapper {
+            flex: 0 0 260px;
+            height: 260px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid var(--accent-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-image-wrapper:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .profile-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .profile-text h2 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        .profile-text .highlight {
+            color: var(--primary-color);
+            background: linear-gradient(120deg, transparent 0%, transparent 100%, #fbc02d 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 30%;
+            background-position: 0 85%;
+        }
+
+        /* --- TIMETABLE --- */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .timetable th, .timetable td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .timetable thead th {
+            background-color: var(--primary-color);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .timetable .slot-time {
+            font-weight: bold;
+            color: var(--primary-color);
+            background-color: #fdfaf6;
+            border-right: 2px solid var(--accent-color);
+        }
+
+        .timetable .break {
+            background-color: #eeeeee;
+            color: #777;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* --- NOTES GRID (MAIN PAGE) --- */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .subject-card {
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border-top: 5px solid var(--accent-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15);
+        }
+
+        .subject-card h3 {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .subject-card .course-code {
+            color: var(--secondary-color);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .subject-desc {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .btn-open-resources {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-open-resources:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- DETAIL LINK LIST STYLES --- */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-bottom: 2px solid transparent;
+        }
+        .back-btn:hover {
+            color: var(--primary-color);
+            border-color: var(--accent-color);
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .resource-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .resource-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .resource-link-btn {
+            padding: 8px 15px;
+            background-color: #f0f5f9;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .resource-link-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+             .profile-image-wrapper {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="#home" class="site-title">DINESH KUMAR</a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#timetable" class="nav-link">Timetable</a></li>
+                <li><a href="#notes" class="nav-link">Notes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <div id="home" class="page-content active">
+            <div class="section-card" style="text-align: center; padding: 80px 30px;">
+                <h1 style="font-size: 3.5rem; margin-bottom: 15px; line-height: 1.1;">Academic<br><span style="color: var(--accent-color);">Portfolio</span></h1>
+                <p style="max-width: 600px; margin: 20px auto; font-size: 1.2rem; color: var(--secondary-color);">
+                    Centralized Knowledge Repository for Artificial Intelligence & Data Science.
+                </p>
+                <div style="margin-top: 40px;">
+                    <a href="#timetable" class="nav-link" style="background-color: var(--primary-color); color: white; margin: 10px; display: inline-block;">View Schedule</a>
+                    <a href="#notes" class="nav-link" style="background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); margin: 10px; display: inline-block;">Access Notes</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" class="page-content">
+            <div style="text-align: center;"><h2 class="page-title">Profile</h2></div>
+            <div class="section-card profile-container">
+                <div class="profile-image-wrapper">
+                    <img src="image_0.png" alt="Dinesh Kumar">
+                </div>
+                <div class="profile-text">
+                    <h2>Hello, I'm <span style="color: var(--accent-color);">Dinesh Kumar</span></h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #444;">
+                        I am a B.Tech student pursuing <strong>Artificial Intelligence and Data Science (AIDS)</strong> at <strong>Amrita Vishwa Vidyapeetham</strong>. Currently in my <strong>First Semester</strong>.
+                    </p>
+                    <p style="font-size: 1.1rem; color: #444;">
+                        I created this portal to organize my academic materials, track my schedule, and maintain a digital record of my learning journey in AI & DS.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="timetable" class="page-content">
+            <div style="text-align: center;"><h2 class="page-title">Fall 2025 Schedule</h2></div>
+            <div class="section-card">
+                <div style="text-align: center; margin-bottom: 20px; color: var(--secondary-color); font-weight: 600;">
+                    Class: I-SEM-B.Tech-AI-DS | Room: 16
+                </div>
+                <div class="table-wrapper">
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="slot-time">08:00 - 08:50</td>
+                                <td colspan="5" style="color: #999; font-style: italic;">Evaluation</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">08:50 - 09:40</td>
+                                <td><strong>23EEE103</strong><br>Intro Elec. Eng.</td>
+                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
+                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
+                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
+                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">09:40 - 10:30</td>
+                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
+                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
+                                <td><strong>23EEE103</strong><br>Intro Elec. Eng.</td>
+                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
+                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">10:30 - 10:45</td>
+                                <td colspan="5" class="break">Morning Break</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">10:45 - 11:35</td>
+                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
+                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
+                                <td><strong>22AVP103</strong><br>Mastery Mind</td>
+                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
+                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">11:35 - 12:25</td>
+                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
+                                <td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td>
+                                <td><strong>22AVP103</strong><br>Mastery Mind</td>
+                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
+                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">12:25 - 01:15</td>
+                                <td><strong>22ADM101</strong><br>Indian Heritage</td>
+                                <td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td>
+                                <td><strong>22ADM101</strong><br>Indian Heritage</td>
+                                <td><strong>23EEE103</strong><br>Elec. Eng.</td>
+                                <td>Project/Lab</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">01:15 - 02:05</td>
+                                <td colspan="5" class="break">Lunch Break</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time">02:05 - 02:55</td>
+                                <td><strong>23PHY104 (Lab)</strong><br>Comp. Mech 1</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                            </tr>
+                            <tr>
+                                <td class="slot-time" rowspan="2" style="vertical-align: middle;">02:55 - 04:35</td>
+                                <td><strong>23PHY104 (Lab)</strong></td>
+                                <td rowspan="2" style="vertical-align: middle;"><strong>23BIO112 (Lab)</strong><br>Bio Data</td>
+                                <td rowspan="2" style="vertical-align: middle;"><strong>23MAT106 (Lab)</strong><br>Maths Intel Sys</td>
+                                <td rowspan="2" style="vertical-align: middle;"><strong>23AID102 (Lab)</strong><br>Elements Comp 1</td>
+                                <td rowspan="2" style="vertical-align: middle;"><strong>23AID101 (Lab)</strong><br>Comp. Thinking</td>
+                            </tr>
+                            <tr>
+                                <td>Project/Lab</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes" class="page-content">
+            <div style="text-align: center;"><h2 class="page-title">Subject Resources</h2></div>
+            <p style="text-align: center; margin-bottom: 30px;">Select a subject to view all related notes and files.</p>
+            
+            <div class="notes-grid">
+                
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23MAT106</span>
+                        <h3>Maths for Intelligent Systems 1</h3>
+                        <p class="subject-desc">Linear Algebra, Differential Equations, Probability & Quantum basics.</p>
+                    </div>
+                    <a href="#maths-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23PHY104</span>
+                        <h3>Computational Mechanics 1</h3>
+                        <p class="subject-desc">Physics simulations, mechanics, and computational modeling.</p>
+                    </div>
+                    <a href="#physics-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23AID101</span>
+                        <h3>Computational Thinking</h3>
+                        <p class="subject-desc">Algorithmic logic, problem decomposition, and flow control.</p>
+                    </div>
+                    <a href="#thinking-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23AID102</span>
+                        <h3>Elements of Computing 1</h3>
+                        <p class="subject-desc">Computer architecture basics, OS fundamentals, and hardware.</p>
+                    </div>
+                    <a href="#elements-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23EEE103</span>
+                        <h3>Intro to Electrical Engineering</h3>
+                        <p class="subject-desc">Circuit theory, electronics components, and systems.</p>
+                    </div>
+                    <a href="#eee-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                <div class="subject-card">
+                    <div>
+                        <span class="course-code">23BIO112</span>
+                        <h3>Intro to Biological Data</h3>
+                        <p class="subject-desc">Bioinformatics basics and biological data analysis.</p>
+                    </div>
+                    <a href="#bio-view" class="btn-open-resources">Open Resources</a>
+                </div>
+
+                 <div class="subject-card" style="border-top-color: #546e7a;">
+                    <div>
+                        <span class="course-code">Others</span>
+                        <h3>Heritage & Mastery</h3>
+                        <p class="subject-desc">Indian Heritage (22ADM101) & Mastery Over Mind (22AVP103).</p>
+                    </div>
+                    <a href="#others-view" class="btn-open-resources" style="background-color: #546e7a;">Open Resources</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="maths-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Maths for Intelligent Systems 1</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes (Professor Website)</span>
+                        <a href="https://sd3ph.github.io/#classroom" target="_blank" class="resource-link-btn">Visit Site</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="physics-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Computational Mechanics 1</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes</span>
+                        <a href="https://drive.google.com/drive/folders/119wKrPA02FsklEZJxEklQsXXEAb3H-9B?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                    <li class="resource-item">
+                        <span class="resource-name">Matlab Codes</span>
+                        <a href="https://drive.google.com/drive/folders/1tS4uSPdi08FobRELnJGoXvKzQ5myuwvK?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="thinking-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Computational Thinking</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes</span>
+                        <a href="https://drive.google.com/drive/folders/1HgBrlXzIs0o99v_U6buvvjlR-XrcOaFQ?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                    <li class="resource-item">
+                        <span class="resource-name">Exam Papers</span>
+                        <a href="https://drive.google.com/drive/folders/1_1oJJrtMEirKjaOOtwc73wVLP_mIE8kg?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                    <li class="resource-item">
+                        <span class="resource-name">My Practice (Computational Thinking)</span>
+                        <a href="https://drive.google.com/drive/folders/1FvoeQfsuIrcvhl04eKt0oc7EpudbDpq9?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="elements-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Elements of Computing 1</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes (SharePoint)</span>
+                        <a href="https://amritavishwavidyapeetham-my.sharepoint.com/:f:/g/personal/k_sreelakshmi_cb_amrita_edu/EugYYzkonEhMmxjgYfWQTFkB1VrC9yhXtsLL9lxIw1umNQ?e=la93JY" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="eee-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Intro to Electrical Engineering</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes</span>
+                        <a href="https://drive.google.com/drive/folders/1VKqwYtliiS7Nmy40dIce4HypFVxKyciC?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="bio-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Intro to Biological Data</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Class Notes</span>
+                        <a href="https://drive.google.com/drive/folders/1ah9LOh81pv7YDDI7-pdkc4vOO4tPclyz?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                    <li class="resource-item">
+                        <span class="resource-name">Linux Class Materials</span>
+                        <a href="https://drive.google.com/drive/folders/1fvE678CuD14bZ-eyFRHkTi13E77vbF70?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                    <li class="resource-item">
+                        <span class="resource-name">Python & Matlab Codes</span>
+                        <a href="https://drive.google.com/drive/folders/1Wz3DyJpm8VCkzUx9xLHRsX2frzYtXqqn?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="others-view" class="page-content">
+            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <div class="section-card">
+                <h2>Heritage & Mastery</h2>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <span class="resource-name">Subject Links Coming Soon</span>
+                        <a href="#" class="resource-link-btn" style="background-color: #ddd; color: #777;">Pending</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link, .btn-open-resources, .back-btn');
+            const pageContents = document.querySelectorAll('.page-content');
+
+            function switchTab(targetId) {
+                // If switching to a detail view, don't change top nav active state
+                if(!targetId.includes('view')) {
+                    navLinks.forEach(nav => {
+                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                    });
+                     const activeLink = document.querySelector(`.nav-link[href="${targetId}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+
+                pageContents.forEach(content => content.classList.remove('active'));
+
+                const activeContent = document.querySelector(targetId);
+                if (activeContent) activeContent.classList.add('active');
+                
+                window.scrollTo(0, 0);
+            }
+
+            // Handle Clicks
+            document.body.addEventListener('click', function(e) {
+                // Check if clicked element or parent is a link/button with hash
+                const target = e.target.closest('a');
+                if (target && target.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = target.getAttribute('href');
+                    
+                    // Logic: If going back to #notes from a detail view
+                    if(targetId === '#notes') {
+                        history.pushState(null, null, '#notes');
+                        switchTab('#notes');
+                        return;
+                    }
+
+                    history.pushState(null, null, targetId);
+                    switchTab(targetId);
+                }
+            });
+
+            function handleHashChange() {
+                const currentHash = window.location.hash || '#home';
+                switchTab(currentHash);
+            }
+
+            window.addEventListener('popstate', handleHashChange);
+            handleHashChange();
+        });
+    </script>
+</body>
+</html>
