@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dinesh Kumar | Academic Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* --- THEME VARIABLES --- */
         :root {
             --primary-color: #006064; /* Deep Teal */
-            --secondary-color: #546e7a; /* Muted Blue-Grey */
+            --secondary-color: #455a64; /* Muted Blue-Grey */
             --accent-color: #fbc02d; /* Mustard Gold */
-            --bg-light: #fdfaf6; /* Cream Background */
+            --bg-light: #f5f7fa; /* Light Blue-Grey Background */
             --bg-white: #ffffff;
             --text-dark: #263238;
             --border-color: #e0e0e0;
@@ -45,19 +45,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 100;
+            padding: 0 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
             box-sizing: border-box;
         }
 
         .site-title {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--accent-color);
-            font-weight: 700;
+            font-weight: 800;
             text-decoration: none;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .navbar ul {
@@ -71,11 +72,12 @@
             color: rgba(255,255,255,0.85);
             text-decoration: none;
             font-weight: 600;
-            padding: 10px 15px;
-            margin-left: 5px;
-            border-radius: 4px;
+            padding: 10px 18px;
+            margin-left: 8px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             font-size: 0.95rem;
+            cursor: pointer;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -86,7 +88,7 @@
 
         /* --- CONTAINER & ANIMATIONS --- */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
@@ -110,17 +112,17 @@
 
         .section-card {
             background-color: var(--bg-white);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
             margin-bottom: 30px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
         .page-title {
             text-align: center;
-            margin-bottom: 40px;
-            font-size: 2.2rem;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
             position: relative;
             display: inline-block;
         }
@@ -128,32 +130,113 @@
         .page-title::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 4px;
+            width: 80px;
+            height: 5px;
             background: var(--accent-color);
-            margin: 10px auto 0;
-            border-radius: 2px;
+            margin: 15px auto 0;
+            border-radius: 3px;
         }
 
-        /* --- ABOUT ME SECTION --- */
+        /* --- HERO SECTION (HOME UPGRADE) --- */
+        .hero-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero-title {
+            font-size: 3.8rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .semester-badge {
+            display: inline-block;
+            background-color: #e0f7fa;
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid #b2ebf2;
+        }
+
+        /* --- HOME ACTION GRID (3 BUTTONS) --- */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+        }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .action-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .action-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .action-desc {
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+        }
+
+        /* --- PROFILE SECTION --- */
         .profile-container {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
         }
 
         .profile-image-wrapper {
-            flex: 0 0 260px;
-            height: 260px;
+            flex: 0 0 280px;
+            height: 280px;
             border-radius: 50%;
             overflow: hidden;
-            border: 6px solid var(--accent-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 8px solid var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             transition: transform 0.4s ease;
         }
 
         .profile-image-wrapper:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.03);
         }
 
         .profile-image-wrapper img {
@@ -161,19 +244,6 @@
             height: 100%;
             object-fit: cover;
             object-position: top center;
-        }
-
-        .profile-text h2 {
-            font-size: 2.4rem;
-            margin-bottom: 15px;
-        }
-
-        .profile-text .highlight {
-            color: var(--primary-color);
-            background: linear-gradient(120deg, transparent 0%, transparent 100%, #fbc02d 100%);
-            background-repeat: no-repeat;
-            background-size: 100% 30%;
-            background-position: 0 85%;
         }
 
         /* --- TIMETABLE --- */
@@ -186,11 +256,11 @@
         .timetable {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px;
+            min-width: 900px;
         }
 
         .timetable th, .timetable td {
-            padding: 15px;
+            padding: 18px;
             text-align: center;
             border-bottom: 1px solid #eee;
             font-size: 0.95rem;
@@ -201,14 +271,14 @@
             color: white;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .timetable .slot-time {
             font-weight: bold;
             color: var(--primary-color);
             background-color: #fdfaf6;
-            border-right: 2px solid var(--accent-color);
+            border-right: 3px solid var(--accent-color);
         }
 
         .timetable .break {
@@ -216,41 +286,41 @@
             color: #777;
             font-weight: 700;
             letter-spacing: 2px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
         }
 
-        /* --- NOTES GRID (MAIN PAGE) --- */
-        .notes-grid {
+        /* --- GRID CARDS (Used for both Curriculum & Notes) --- */
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 35px;
         }
 
-        .subject-card {
+        .grid-card {
             background-color: var(--bg-white);
             border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
-            border-top: 5px solid var(--accent-color);
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            border-top: 6px solid var(--accent-color);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .subject-card:hover {
+        .grid-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 96, 100, 0.15);
         }
 
-        .subject-card h3 {
+        .grid-card h3 {
             margin-top: 5px;
             margin-bottom: 10px;
             font-size: 1.4rem;
         }
 
-        .subject-card .course-code {
+        .course-code {
             color: var(--secondary-color);
             font-weight: 700;
             font-size: 0.85rem;
@@ -260,18 +330,18 @@
             margin-bottom: 5px;
         }
 
-        .subject-desc {
+        .card-desc {
             color: #666;
             font-size: 0.95rem;
             margin-bottom: 25px;
             flex-grow: 1;
         }
 
-        .btn-open-resources {
+        .btn-card {
             display: block;
             width: 100%;
             text-align: center;
-            padding: 14px 0;
+            padding: 15px 0;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
@@ -282,21 +352,64 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .btn-open-resources:hover {
+        .btn-card:hover {
             background-color: var(--accent-color);
             color: var(--text-dark);
             transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
 
-        /* --- DETAIL LINK LIST STYLES --- */
+        /* --- CURRICULUM DETAIL STYLES --- */
+        .syllabus-block {
+            margin-bottom: 30px;
+        }
+        .unit-title {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            background: linear-gradient(to right, #f9f9f9, transparent);
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        .unit-content {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #555;
+            border: 1px solid #eee;
+            line-height: 1.8;
+        }
+        .eval-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .eval-table th, .eval-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        .eval-table th {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* --- RESOURCE LIST STYLES --- */
         .back-btn {
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--secondary-color);
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: color 0.2s;
         }
         .back-btn:hover {
             color: var(--primary-color);
@@ -313,32 +426,34 @@
             align-items: center;
             justify-content: space-between;
             background: white;
-            padding: 15px 20px;
+            padding: 20px 25px;
             margin-bottom: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .resource-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid var(--accent-color);
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--accent-color);
         }
 
         .resource-name {
             font-weight: 600;
+            font-size: 1.05rem;
             color: var(--text-dark);
         }
 
         .resource-link-btn {
-            padding: 8px 15px;
-            background-color: #f0f5f9;
+            padding: 10px 20px;
+            background-color: #e0f2f1;
             color: var(--primary-color);
             text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.85rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: 700;
+            transition: background 0.2s;
         }
         .resource-link-btn:hover {
             background-color: var(--primary-color);
@@ -346,14 +461,12 @@
         }
 
         @media (max-width: 768px) {
-            .profile-container {
-                flex-direction: column;
-                text-align: center;
-            }
-             .profile-image-wrapper {
-                width: 200px;
-                height: 200px;
-            }
+            .profile-container { flex-direction: column; text-align: center; }
+            .profile-image-wrapper { width: 220px; height: 220px; }
+            .hero-title { font-size: 2.5rem; }
+            .action-grid { grid-template-columns: 1fr; }
+            .nav-link { padding: 10px; font-size: 0.8rem; }
+            .main-header { padding: 0 20px; }
         }
     </style>
 </head>
@@ -365,7 +478,8 @@
             <ul>
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#timetable" class="nav-link">Timetable</a></li>
+                <li><a href="#timetable" class="nav-link">Schedule</a></li>
+                <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
                 <li><a href="#notes" class="nav-link">Notes</a></li>
             </ul>
         </nav>
@@ -374,20 +488,41 @@
     <div class="container">
 
         <div id="home" class="page-content active">
-            <div class="section-card" style="text-align: center; padding: 80px 30px;">
-                <h1 style="font-size: 3.5rem; margin-bottom: 15px; line-height: 1.1;">Academic<br><span style="color: var(--accent-color);">Portfolio</span></h1>
-                <p style="max-width: 600px; margin: 20px auto; font-size: 1.2rem; color: var(--secondary-color);">
-                    Centralized Knowledge Repository for Artificial Intelligence & Data Science.
-                </p>
-                <div style="margin-top: 40px;">
-                    <a href="#timetable" class="nav-link" style="background-color: var(--primary-color); color: white; margin: 10px; display: inline-block;">View Schedule</a>
-                    <a href="#notes" class="nav-link" style="background-color: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); margin: 10px; display: inline-block;">Access Notes</a>
+            <div class="section-card" style="border: none; background: transparent; box-shadow: none; padding: 20px 0;">
+                
+                <div class="hero-header">
+                    <span class="semester-badge">Semester 1 • B.Tech AIDS</span>
+                    <h1 class="hero-title">Academic <span style="color: var(--accent-color);">Portfolio</span></h1>
+                    <p class="hero-subtitle">
+                        Centralized Knowledge Repository for Artificial Intelligence & Data Science at Amrita Vishwa Vidyapeetham.
+                    </p>
                 </div>
+
+                <div class="action-grid">
+                    <a href="#timetable" class="action-card">
+                        <div class="action-icon">📅</div>
+                        <div class="action-title">Weekly Schedule</div>
+                        <div class="action-desc">View class timings, room numbers, and lab slots.</div>
+                    </a>
+
+                    <a href="#curriculum" class="action-card">
+                        <div class="action-icon">📚</div>
+                        <div class="action-title">Curriculum</div>
+                        <div class="action-desc">Explore syllabus units, course codes, and evaluation patterns.</div>
+                    </a>
+
+                    <a href="#notes" class="action-card">
+                        <div class="action-icon">📂</div>
+                        <div class="action-title">Course Notes</div>
+                        <div class="action-desc">Access Google Drive links for lectures and study materials.</div>
+                    </a>
+                </div>
+
             </div>
         </div>
 
         <div id="about" class="page-content">
-            <div style="text-align: center;"><h2 class="page-title">Profile</h2></div>
+            <div style="text-align: center;"><h2 class="page-title">Student Profile</h2></div>
             <div class="section-card profile-container">
                 <div class="profile-image-wrapper">
                     <img src="image_0.png" alt="Dinesh Kumar">
@@ -398,7 +533,7 @@
                         I am a B.Tech student pursuing <strong>Artificial Intelligence and Data Science (AIDS)</strong> at <strong>Amrita Vishwa Vidyapeetham</strong>. Currently in my <strong>First Semester</strong>.
                     </p>
                     <p style="font-size: 1.1rem; color: #444;">
-                        I created this portal to organize my academic materials, track my schedule, and maintain a digital record of my learning journey in AI & DS.
+                        This portfolio serves as my academic dashboard, featuring my class schedule, detailed syllabus curriculum, and direct access to my study materials.
                     </p>
                 </div>
             </div>
@@ -407,7 +542,7 @@
         <div id="timetable" class="page-content">
             <div style="text-align: center;"><h2 class="page-title">Fall 2025 Schedule</h2></div>
             <div class="section-card">
-                <div style="text-align: center; margin-bottom: 20px; color: var(--secondary-color); font-weight: 600;">
+                <div style="text-align: center; margin-bottom: 25px; color: var(--secondary-color); font-weight: 700; font-size: 1.1rem;">
                     Class: I-SEM-B.Tech-AI-DS | Room: 16
                 </div>
                 <div class="table-wrapper">
@@ -500,82 +635,354 @@
             </div>
         </div>
 
-        <div id="notes" class="page-content">
-            <div style="text-align: center;"><h2 class="page-title">Subject Resources</h2></div>
-            <p style="text-align: center; margin-bottom: 30px;">Select a subject to view all related notes and files.</p>
+        <div id="curriculum" class="page-content">
+            <div style="text-align: center;"><h2 class="page-title">Syllabus & Curriculum</h2></div>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">Select a subject below to view detailed syllabus units and evaluation patterns.</p>
             
-            <div class="notes-grid">
-                
-                <div class="subject-card">
+            <div class="grid-container">
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23MAT106</span>
                         <h3>Maths for Intelligent Systems 1</h3>
-                        <p class="subject-desc">Linear Algebra, Differential Equations, Probability & Quantum basics.</p>
+                        <p class="card-desc">Credits: 4 | Semester: 1</p>
                     </div>
-                    <a href="#maths-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#curr-view-maths" class="btn-card">View Syllabus</a>
                 </div>
-
-                <div class="subject-card">
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23PHY104</span>
                         <h3>Computational Mechanics 1</h3>
-                        <p class="subject-desc">Physics simulations, mechanics, and computational modeling.</p>
+                        <p class="card-desc">Credits: 3 | Semester: 1</p>
                     </div>
-                    <a href="#physics-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#curr-view-physics" class="btn-card">View Syllabus</a>
                 </div>
-
-                <div class="subject-card">
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23AID101</span>
                         <h3>Computational Thinking</h3>
-                        <p class="subject-desc">Algorithmic logic, problem decomposition, and flow control.</p>
+                        <p class="card-desc">Credits: 3 | Semester: 1</p>
                     </div>
-                    <a href="#thinking-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#curr-view-thinking" class="btn-card">View Syllabus</a>
                 </div>
-
-                <div class="subject-card">
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23AID102</span>
                         <h3>Elements of Computing 1</h3>
-                        <p class="subject-desc">Computer architecture basics, OS fundamentals, and hardware.</p>
+                        <p class="card-desc">Credits: 3 | Semester: 1</p>
                     </div>
-                    <a href="#elements-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#curr-view-elements" class="btn-card">View Syllabus</a>
                 </div>
-
-                <div class="subject-card">
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23EEE103</span>
                         <h3>Intro to Electrical Engineering</h3>
-                        <p class="subject-desc">Circuit theory, electronics components, and systems.</p>
+                        <p class="card-desc">Credits: 3 | Semester: 1</p>
                     </div>
-                    <a href="#eee-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#curr-view-eee" class="btn-card">View Syllabus</a>
+                </div>
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">22AVP103</span>
+                        <h3>Mastery Over Mind</h3>
+                        <p class="card-desc">Credits: 2 | Semester: 1</p>
+                    </div>
+                    <a href="#curr-view-mastery" class="btn-card">View Syllabus</a>
+                </div>
+                 <div class="grid-card">
+                    <div>
+                        <span class="course-code">22ADM101</span>
+                        <h3>Foundations of Indian Heritage</h3>
+                        <p class="card-desc">Credits: 2 | Semester: 1</p>
+                    </div>
+                    <a href="#curr-view-heritage" class="btn-card">View Syllabus</a>
+                </div>
+                 <div class="grid-card">
+                    <div>
+                        <span class="course-code">23BIO112</span>
+                        <h3>Introduction to Biological Data</h3>
+                        <p class="card-desc">Credits: 3 | Semester: 1</p>
+                    </div>
+                    <a href="#curr-view-bio" class="btn-card">View Syllabus</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="curr-view-maths" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Mathematics for Intelligent Systems 1</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 1</h4>
+                    <div class="unit-content">Basics of Linear Algebra – Linear Dependence and independence of vectors – Gaussian Elimination – Rank of set of vectors forming a matrix – Vector space and Basis set for a Vector space – Dot product and Orthogonality -CR decomposition – Rotation matrices – Eigenvalues and Eigenvectors and its interpretation-Introduction to SVD-Computational experiments using Matlab/Excel/Simulink.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 2</h4>
+                    <div class="unit-content">Ordinary Linear differential equations, formulation – concept of slope, velocity and acceleration – analytical and numerical solutions- Impulse Response computations- converting higher order into first order equations – examples of ODE modelling in falling objects, satellite and planetary motion, Electrical and mechanical systems– Introduction to solving simple differential equations with Simulink- Introduction to one variable optimization – Taylor series- Computational experiments using Matlab /Excel/Simulink.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 3</h4>
+                    <div class="unit-content">Introduction to random variables (continuous and discrete), mean, standard deviation, variance, sum of independent random variable, convolution, sum of convolution integral, probability distributions.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 4</h4>
+                    <div class="unit-content">Introduction to quantum computing, Quantum Computing Roadmap, Quantum Mission in India, A Brief Introduction to Applications of Quantum computers, Quantum Computing Basics, Bracket Notation, Inner product, outer product, concept of state.</div>
                 </div>
 
-                <div class="subject-card">
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-physics" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Computational Mechanics 1</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 1: Kinematics and Statics</h4>
+                    <div class="unit-content">Position, velocity, and acceleration of particles, Newton’s laws of motion, Work and energy, Rigid body kinematics, Translations and Rotations, Alternate representations of Rigid body Rotation – Rotation matrices, Euler angles, Axis-angle representations, Quaternions. Introduction to statics and equilibrium, Free body diagrams, Equilibrium of particles and rigid bodies, Computational aspects of solving kinematics and statics problems of real world systems.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 2: Introduction to Kinetics</h4>
+                    <div class="unit-content">Cross product of two vectors, Inertial and Non-Inertial frame of reference, Linear momentum, Center of mass, Coriolis, Inertial and Centripetal forces, Acceleration in polar coordinates, Angular velocity, Angular momentum and Torque on particles, Computational aspects of solving kinetics problems of particles.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 3: Kinetics of Rigid Bodies</h4>
+                    <div class="unit-content">Two particle system angular momentum, Inertia matrix, Moment and product of inertia, Principal axes theorem, Principal axes as eigenvector of Inertia matrix, Parallel axes theorem, Computational aspects of solving kinetics problems of particles, Introduction to Euler-Lagrange and Newton-Euler equations for solving rigid body dynamics. Euler-Lagrange equation derivation using one dimensional point mass example, Application of Euler-Lagrange equation for solving dynamics of simple mechanical systems.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-thinking" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Computational Thinking</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 1</h4>
+                    <div class="unit-content">Computational Thinking, critical thinking, data representation, abstraction, decomposition- breaking problems into parts, basic data types, pseudocode, algorithms-methods to solve the problems, brute-force or exhaustive search problems, divide and conquer problems</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 2</h4>
+                    <div class="unit-content">Computational Thinking using spreadsheets, basic operations, cell references – relative and absolute, lookup operations, implement fractals – newton, Sierpinski triangle, L-system fractals, solve calculus based problems using spreadsheet, using spreadsheet for solving probability related problems</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 3</h4>
+                    <div class="unit-content">Computational thinking using matlab, basic operations, plotting of vectors, array and matrix operations, implement fractals – newton, Sierpinski triangle, L-system fractals, solve calculus based problems using matlab, using matlab for solving probability related problems</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-elements" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Elements of Computing 1</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 1</h4>
+                    <div class="unit-content">Number System, Conversions, Signed and Unsigned Binary Number Representation, Boolean algebra and Karnaugh Maps, Logic gates, Realization of basic gates using universal gates, Boolean function synthesis, Introduction to Hardware simulator platform Nand2teris, Hardware description language, Implementation of basic gates and its multi-bit and multiway versions in Nand2teris software suite.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 2</h4>
+                    <div class="unit-content">Combinational Logic, Half Adder, Full Adder, Multiplexer and demultiplexer, Multi-bit and Multiway versions, Realization of Boolean functions using combinational logic, Arithmetic logic unit (ALU)-specification, design, Sequential logic, Flip Flops, Registers, RAM, ROM.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 3</h4>
+                    <div class="unit-content">Von-Neumann architecture, Program Counter, Central Processing unit, Data Memory, Hack machine language specifications/ instructions for CPU design, Hack CPU Design, CPU Control logic, building a Hack Computer.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-eee" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Intro to Electrical Engineering</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 1: DC Circuit</h4>
+                    <div class="unit-content">EMF, Charge, Voltage, Current – Linear circuit elements – Energy and power – Ohms law – Kirchhoff’s voltage and current law – Series parallel combination of R, L, C components – Voltage divider and current divider rules – Super position theorem – Nodal and Mesh Analysis – Step response of RL and RC Circuits (Transient behaviour) – Equivalent network: Thevenin and Norton.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 2: AC Circuit</h4>
+                    <div class="unit-content">Impedance – Instantaneous, Average, Active, Reactive and Apparent Power – Power Factor – Phasors</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit 3: Introduction to Control Systems</h4>
+                    <div class="unit-content">State Space Representation: State, State variable, and State Model – Canonical state space model for Series RLC Circuit – Solution using eigen values and eigen vectors.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-mastery" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Mastery Over Mind</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit I: Describe Meditation and Understand its Benefits</h4>
+                    <div class="unit-content">A: Importance of meditation. How does meditation help to overcome obstacles in life. B: Understand how meditation works. Understand how meditation helps in improving physical and mental health. Understand how meditation helps in the development of personality.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit II: Causes of Stress and How Meditation Improves Well-being</h4>
+                    <div class="unit-content">A: Learn how to prepare for meditation. Understand the aids that can help in effectively practicing meditation. Understand the role of sleep, physical activity, and a balanced diet in supporting meditation. B: Causes of Stress. The problem of not being relaxed. Effects of stress on health. How meditation helps to relieve stress. Basics of stress management at home and the workplace.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit III: The Science of Meditation</h4>
+                    <div class="unit-content">A: A preliminary understanding of the Science of meditation. What can modern science tell us about this tradition-based method? B: How meditation helps humanity according to what we know from scientific research</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit IV: Practicing MA OM Meditation in Daily Life</h4>
+                    <div class="unit-content">Guided Meditation Sessions following scripts provided (Level One to Level Five)</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit V: Improving Communication and Relationships</h4>
+                    <div class="unit-content">How meditation and mindfulness influence interpersonal communication. The role of meditation in improving relationship quality in the family, at the university and in the workplace.</div>
+                </div>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Unit VI: Meditation and Compassion-driven Action</h4>
+                    <div class="unit-content">Understand how meditation can help to motivate compassion-driven action.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Continuous Assessment (CA)</td><td>Internal</td><td>80</td></tr>
+                    <tr><td>End Semester</td><td>External</td><td>20</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-heritage" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Foundations of Indian Heritage</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Overview</h4>
+                    <div class="unit-content">Educational Heritage of Ancient India, Life and Happiness, Impact of Colonialism and Decolonization, A timeline of Early Indian Subcontinent, Pinnacle of Selflessness and ultimate freedom, Indian approach towards life, Circle of Life, Ocean of love; Indian Mahatmas, Man’s association with Nature, Celebrating life 24/7, Metaphors and Tropes, Become A Strategic Thinker (Games / Indic activity), India: In the Views of Other Scholars and Travellers, Personality Development Through Yoga, Hallmark of Indian Traditions: Advaita Vedanta, Theory of oneness, Conversations on Compassion with Amma.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Continuous Assessment (CA)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Mid-Semester</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>End Semester</td><td>External</td><td>40</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="curr-view-bio" class="page-content">
+            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
+            <div class="section-card">
+                <h2>Introduction to Biological Data</h2>
+                <div class="syllabus-block">
+                    <h4 class="unit-title">Course Overview</h4>
+                    <div class="unit-content">Introduction to biological datasets, bioinformatics, and data analysis techniques relevant to AI/DS.</div>
+                </div>
+                <h3>Evaluation Pattern</h3>
+                <table class="eval-table">
+                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
+                    <tr><td>Assignments (Min 2)</td><td>Internal</td><td>30</td></tr>
+                    <tr><td>Quizzes (Min 2)</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
+                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div id="notes" class="page-content">
+            <div style="text-align: center;"><h2 class="page-title">Course Notes</h2></div>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">Select a subject below to access cloud-hosted study materials.</p>
+            
+            <div class="grid-container">
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">23MAT106</span>
+                        <h3>Maths for Intelligent Systems 1</h3>
+                    </div>
+                    <a href="#maths-view" class="btn-card">Open Drive Links</a>
+                </div>
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">23PHY104</span>
+                        <h3>Computational Mechanics 1</h3>
+                    </div>
+                    <a href="#physics-view" class="btn-card">Open Drive Links</a>
+                </div>
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">23AID101</span>
+                        <h3>Computational Thinking</h3>
+                    </div>
+                    <a href="#thinking-view" class="btn-card">Open Drive Links</a>
+                </div>
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">23AID102</span>
+                        <h3>Elements of Computing 1</h3>
+                    </div>
+                    <a href="#elements-view" class="btn-card">Open Drive Links</a>
+                </div>
+                <div class="grid-card">
+                    <div>
+                        <span class="course-code">23EEE103</span>
+                        <h3>Intro to Electrical Engineering</h3>
+                    </div>
+                    <a href="#eee-view" class="btn-card">Open Drive Links</a>
+                </div>
+                <div class="grid-card">
                     <div>
                         <span class="course-code">23BIO112</span>
                         <h3>Intro to Biological Data</h3>
-                        <p class="subject-desc">Bioinformatics basics and biological data analysis.</p>
                     </div>
-                    <a href="#bio-view" class="btn-open-resources">Open Resources</a>
+                    <a href="#bio-view" class="btn-card">Open Drive Links</a>
                 </div>
-
-                 <div class="subject-card" style="border-top-color: #546e7a;">
+                 <div class="grid-card" style="border-top-color: #546e7a;">
                     <div>
                         <span class="course-code">Others</span>
                         <h3>Heritage & Mastery</h3>
-                        <p class="subject-desc">Indian Heritage (22ADM101) & Mastery Over Mind (22AVP103).</p>
                     </div>
-                    <a href="#others-view" class="btn-open-resources" style="background-color: #546e7a;">Open Resources</a>
+                    <a href="#others-view" class="btn-card" style="background-color: #546e7a;">Open Drive Links</a>
                 </div>
-
             </div>
         </div>
 
         <div id="maths-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Maths for Intelligent Systems 1</h2>
+                <h2>Maths Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes (Professor Website)</span>
@@ -586,9 +993,9 @@
         </div>
 
         <div id="physics-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Computational Mechanics 1</h2>
+                <h2>Physics Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -603,9 +1010,9 @@
         </div>
 
         <div id="thinking-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Computational Thinking</h2>
+                <h2>Computational Thinking Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -616,7 +1023,7 @@
                         <a href="https://drive.google.com/drive/folders/1_1oJJrtMEirKjaOOtwc73wVLP_mIE8kg?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
                     </li>
                     <li class="resource-item">
-                        <span class="resource-name">My Practice (Computational Thinking)</span>
+                        <span class="resource-name">My Practice</span>
                         <a href="https://drive.google.com/drive/folders/1FvoeQfsuIrcvhl04eKt0oc7EpudbDpq9?usp=drive_link" target="_blank" class="resource-link-btn">Open Folder</a>
                     </li>
                 </ul>
@@ -624,9 +1031,9 @@
         </div>
 
         <div id="elements-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Elements of Computing 1</h2>
+                <h2>Elements of Computing Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes (SharePoint)</span>
@@ -637,9 +1044,9 @@
         </div>
 
         <div id="eee-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Intro to Electrical Engineering</h2>
+                <h2>Electrical Engineering Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -650,9 +1057,9 @@
         </div>
 
         <div id="bio-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Intro to Biological Data</h2>
+                <h2>Biological Data Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -671,12 +1078,12 @@
         </div>
 
         <div id="others-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Subjects</a>
+            <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Heritage & Mastery</h2>
+                <h2>Heritage & Mastery Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
-                        <span class="resource-name">Subject Links Coming Soon</span>
+                        <span class="resource-name">Links pending</span>
                         <a href="#" class="resource-link-btn" style="background-color: #ddd; color: #777;">Pending</a>
                     </li>
                 </ul>
@@ -687,21 +1094,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link, .btn-open-resources, .back-btn');
+            const navLinks = document.querySelectorAll('.nav-link, .btn-card, .back-btn, .action-card');
             const pageContents = document.querySelectorAll('.page-content');
 
             function switchTab(targetId) {
-                // If switching to a detail view, don't change top nav active state
-                if(!targetId.includes('view')) {
+                // Determine if we need to update the main navigation state
+                if(targetId === '#home' || targetId === '#about' || targetId === '#timetable' || targetId === '#curriculum' || targetId === '#notes') {
                     navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                        if(nav.classList.contains('nav-link')) {
+                            nav.classList.remove('active');
+                            if(nav.getAttribute('href') === targetId) nav.classList.add('active');
+                        }
                     });
-                     const activeLink = document.querySelector(`.nav-link[href="${targetId}"]`);
-                    if (activeLink) activeLink.classList.add('active');
+                } else if (targetId.includes('curr-view')) {
+                     // Keep "Curriculum" active when viewing details
+                     navLinks.forEach(nav => {
+                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                        if(nav.getAttribute('href') === '#curriculum') nav.classList.add('active');
+                    });
+                } else if (targetId.includes('view') && !targetId.includes('curr')) {
+                     // Keep "Notes" active when viewing note details
+                     navLinks.forEach(nav => {
+                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                        if(nav.getAttribute('href') === '#notes') nav.classList.add('active');
+                    });
                 }
 
+                // Hide all pages
                 pageContents.forEach(content => content.classList.remove('active'));
 
+                // Show target page
                 const activeContent = document.querySelector(targetId);
                 if (activeContent) activeContent.classList.add('active');
                 
@@ -710,19 +1132,11 @@
 
             // Handle Clicks
             document.body.addEventListener('click', function(e) {
-                // Check if clicked element or parent is a link/button with hash
                 const target = e.target.closest('a');
                 if (target && target.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
                     const targetId = target.getAttribute('href');
                     
-                    // Logic: If going back to #notes from a detail view
-                    if(targetId === '#notes') {
-                        history.pushState(null, null, '#notes');
-                        switchTab('#notes');
-                        return;
-                    }
-
                     history.pushState(null, null, targetId);
                     switchTab(targetId);
                 }
