@@ -37,10 +37,7 @@
         /* --- NAVIGATION BAR --- */
         .main-header {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nav-height);
+            top: 0; left: 0; width: 100%; height: var(--nav-height);
             background-color: var(--primary-color);
             display: flex;
             justify-content: space-between;
@@ -137,327 +134,89 @@
             border-radius: 3px;
         }
 
-        /* --- HERO SECTION (HOME UPGRADE) --- */
-        .hero-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .hero-title {
-            font-size: 3.8rem;
-            margin-bottom: 10px;
-            line-height: 1.2;
-            color: var(--primary-color);
-        }
+        /* --- HERO SECTION --- */
+        .hero-header { text-align: center; margin-bottom: 50px; }
+        .hero-title { font-size: 3.8rem; margin-bottom: 10px; line-height: 1.2; color: var(--primary-color); }
+        .hero-subtitle { font-size: 1.3rem; color: var(--secondary-color); max-width: 700px; margin: 0 auto; }
+        .semester-badge { display: inline-block; background-color: #e0f7fa; color: var(--primary-color); padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; margin-bottom: 20px; border: 1px solid #b2ebf2; }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--secondary-color);
-            max-width: 700px;
-            margin: 0 auto;
-        }
+        /* --- ACTION GRID --- */
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .action-card { background: white; padding: 40px 30px; border-radius: 16px; text-align: center; text-decoration: none; color: var(--text-dark); box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: all 0.3s ease; border: 2px solid transparent; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 250px; }
+        .action-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15); border-color: var(--accent-color); }
+        .action-icon { font-size: 3rem; margin-bottom: 20px; color: var(--primary-color); }
+        .action-title { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        .action-desc { font-size: 0.95rem; color: var(--secondary-color); }
 
-        .semester-badge {
-            display: inline-block;
-            background-color: #e0f7fa;
-            color: var(--primary-color);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            border: 1px solid #b2ebf2;
-        }
-
-        /* --- HOME ACTION GRID (3 BUTTONS) --- */
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .action-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 16px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-dark);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 250px;
-        }
-
-        .action-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15);
-            border-color: var(--accent-color);
-        }
-
-        .action-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .action-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .action-desc {
-            font-size: 0.95rem;
-            color: var(--secondary-color);
-        }
-
-        /* --- PROFILE SECTION --- */
-        .profile-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .profile-image-wrapper {
-            flex: 0 0 280px;
-            height: 280px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 8px solid var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            transition: transform 0.4s ease;
-        }
-
-        .profile-image-wrapper:hover {
-            transform: scale(1.03);
-        }
-
-        .profile-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-        }
+        /* --- PROFILE --- */
+        .profile-container { display: flex; align-items: center; gap: 60px; }
+        .profile-image-wrapper { flex: 0 0 280px; height: 280px; border-radius: 50%; overflow: hidden; border: 8px solid var(--accent-color); box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: transform 0.4s ease; }
+        .profile-image-wrapper:hover { transform: scale(1.03); }
+        .profile-image-wrapper img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
         /* --- TIMETABLE --- */
-        .table-wrapper {
-            overflow-x: auto;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
+        .table-wrapper { overflow-x: auto; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .timetable { width: 100%; border-collapse: collapse; min-width: 900px; }
+        .timetable th, .timetable td { padding: 18px; text-align: center; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        .timetable thead th { background-color: var(--primary-color); color: white; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        .timetable .slot-time { font-weight: bold; color: var(--primary-color); background-color: #fdfaf6; border-right: 3px solid var(--accent-color); }
+        .timetable .break { background-color: #eeeeee; color: #777; font-weight: 700; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; }
 
-        .timetable {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 900px;
-        }
+        /* --- GRID CARDS --- */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; }
+        .grid-card { background-color: var(--bg-white); border-radius: 16px; padding: 35px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); border-top: 6px solid var(--accent-color); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; justify-content: space-between; }
+        .grid-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0, 96, 100, 0.15); }
+        .grid-card h3 { margin-top: 5px; margin-bottom: 10px; font-size: 1.4rem; }
+        .course-code { color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+        .card-desc { color: #666; font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        .btn-card { display: block; width: 100%; text-align: center; padding: 15px 0; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem; background-color: var(--primary-color); color: white; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-card:hover { background-color: var(--accent-color); color: var(--text-dark); transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
 
-        .timetable th, .timetable td {
-            padding: 18px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            font-size: 0.95rem;
-        }
+        /* --- CURRICULUM --- */
+        .syllabus-block { margin-bottom: 30px; }
+        .unit-title { color: var(--primary-color); border-left: 5px solid var(--accent-color); padding-left: 15px; margin-bottom: 12px; font-size: 1.25rem; background: linear-gradient(to right, #f9f9f9, transparent); padding-top: 5px; padding-bottom: 5px; }
+        .unit-content { background: #ffffff; padding: 15px; border-radius: 8px; font-size: 1rem; color: #555; border: 1px solid #eee; line-height: 1.8; }
+        .eval-table { width: 100%; border-collapse: collapse; margin-top: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .eval-table th, .eval-table td { border: 1px solid #ddd; padding: 15px; text-align: left; }
+        .eval-table th { background-color: var(--secondary-color); color: white; font-weight: 600; }
 
-        .timetable thead th {
+        /* --- RESOURCES --- */
+        .back-btn { display: inline-block; margin-bottom: 25px; color: var(--secondary-color); text-decoration: none; font-weight: 700; font-size: 1rem; border-bottom: 2px solid transparent; cursor: pointer; transition: color 0.2s; }
+        .back-btn:hover { color: var(--primary-color); border-color: var(--accent-color); }
+        .resource-list { list-style: none; padding: 0; }
+        .resource-item { display: flex; align-items: center; justify-content: space-between; background: white; padding: 20px 25px; margin-bottom: 15px; border-radius: 12px; border: 1px solid var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+        .resource-item:hover { transform: translateX(8px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-left: 5px solid var(--accent-color); }
+        .resource-name { font-weight: 600; font-size: 1.05rem; color: var(--text-dark); }
+        .resource-link-btn { padding: 10px 20px; background-color: #e0f2f1; color: var(--primary-color); text-decoration: none; border-radius: 6px; font-size: 0.9rem; font-weight: 700; transition: background 0.2s; }
+        .resource-link-btn:hover { background-color: var(--primary-color); color: white; }
+
+        /* --- LOGIN & PRESENCE STYLES --- */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--primary-color);
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
+            z-index: 9999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
         }
-
-        .timetable .slot-time {
-            font-weight: bold;
-            color: var(--primary-color);
-            background-color: #fdfaf6;
-            border-right: 3px solid var(--accent-color);
+        .login-card {
+            background: white; padding: 40px; border-radius: 15px; width: 350px;
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-
-        .timetable .break {
-            background-color: #eeeeee;
-            color: #777;
-            font-weight: 700;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            text-transform: uppercase;
+        .login-input {
+            width: 100%; padding: 12px; margin: 10px 0;
+            border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;
         }
-
-        /* --- GRID CARDS (Used for both Curriculum & Notes) --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 35px;
+        .btn-login {
+            width: 100%; padding: 12px; background-color: var(--primary-color); color: white;
+            border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 10px;
         }
-
-        .grid-card {
-            background-color: var(--bg-white);
-            border-radius: 16px;
-            padding: 35px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
-            border-top: 6px solid var(--accent-color);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .grid-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 96, 100, 0.15);
-        }
-
-        .grid-card h3 {
-            margin-top: 5px;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .course-code {
-            color: var(--secondary-color);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .card-desc {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .btn-card {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 15px 0;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-card:hover {
-            background-color: var(--accent-color);
-            color: var(--text-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-        }
-
-        /* --- CURRICULUM DETAIL STYLES --- */
-        .syllabus-block {
-            margin-bottom: 30px;
-        }
-        .unit-title {
-            color: var(--primary-color);
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
-            margin-bottom: 12px;
-            font-size: 1.25rem;
-            background: linear-gradient(to right, #f9f9f9, transparent);
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-        .unit-content {
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            color: #555;
-            border: 1px solid #eee;
-            line-height: 1.8;
-        }
-        .eval-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        .eval-table th, .eval-table td {
-            border: 1px solid #ddd;
-            padding: 15px;
-            text-align: left;
-        }
-        .eval-table th {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: 600;
-        }
-
-        /* --- RESOURCE LIST STYLES --- */
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .back-btn:hover {
-            color: var(--primary-color);
-            border-color: var(--accent-color);
-        }
-
-        .resource-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .resource-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            padding: 20px 25px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .resource-item:hover {
-            transform: translateX(8px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-left: 5px solid var(--accent-color);
-        }
-
-        .resource-name {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: var(--text-dark);
-        }
-
-        .resource-link-btn {
-            padding: 10px 20px;
-            background-color: #e0f2f1;
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: background 0.2s;
-        }
-        .resource-link-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
+        .btn-google { background-color: #db4437; margin-top: 10px; }
+        
+        #user-status-bar {
+            background: #263238; color: white; padding: 8px 20px; font-size: 0.9rem;
+            display: flex; justify-content: space-between; align-items: center;
+            position: fixed; bottom: 0; left: 0; width: 100%; z-index: 2000;
+            box-sizing: border-box;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
         }
 
         @media (max-width: 768px) {
@@ -471,6 +230,31 @@
     </style>
 </head>
 <body>
+
+    <div id="login-overlay">
+        <div class="login-card">
+            <h2 style="color: var(--primary-color); margin-top:0;">Portfolio Access</h2>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">Please sign in to access academic resources.</p>
+            
+            <input type="email" id="txtEmail" class="login-input" placeholder="Email Address">
+            <input type="password" id="txtPassword" class="login-input" placeholder="Password">
+            
+            <button id="btnLogin" class="btn-login">Login / Sign Up</button>
+            <button id="btnGoogle" class="btn-login btn-google">Sign in with Google</button>
+            <p id="loginError" style="color: red; font-size: 0.85rem; margin-top: 15px; min-height: 20px;"></p>
+        </div>
+    </div>
+
+    <div id="user-status-bar" style="display:none;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 10px; height: 10px; background: #00e676; border-radius: 50%;"></div>
+            <span id="currentUserDisplay">Connecting...</span>
+        </div>
+        <div>
+            <span style="margin-right: 15px;">Live Users: <strong id="onlineCount" style="color: var(--accent-color);">0</strong></span>
+            <button id="btnLogout" style="background: rgba(255,255,255,0.1); border:none; color: white; padding: 4px 12px; border-radius: 4px; cursor:pointer;">Logout</button>
+        </div>
+    </div>
 
     <header class="main-header">
         <a href="#home" class="site-title">DINESH KUMAR</a>
@@ -525,7 +309,7 @@
             <div style="text-align: center;"><h2 class="page-title">Student Profile</h2></div>
             <div class="section-card profile-container">
                 <div class="profile-image-wrapper">
-                    <img src="image_0.png" alt="Dinesh Kumar">
+                    <img src="image_0.png" alt="Dinesh Kumar" onerror="this.src='https://via.placeholder.com/280x280?text=DK'">
                 </div>
                 <div class="profile-text">
                     <h2>Hello, I'm <span style="color: var(--accent-color);">Dinesh Kumar</span></h2>
@@ -549,86 +333,21 @@
                     <table class="timetable">
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
+                                <th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="slot-time">08:00 - 08:50</td>
-                                <td colspan="5" style="color: #999; font-style: italic;">Evaluation</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">08:50 - 09:40</td>
-                                <td><strong>23EEE103</strong><br>Intro Elec. Eng.</td>
-                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
-                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
-                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
-                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">09:40 - 10:30</td>
-                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
-                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
-                                <td><strong>23EEE103</strong><br>Intro Elec. Eng.</td>
-                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
-                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">10:30 - 10:45</td>
-                                <td colspan="5" class="break">Morning Break</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">10:45 - 11:35</td>
-                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
-                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
-                                <td><strong>22AVP103</strong><br>Mastery Mind</td>
-                                <td><strong>23AID101</strong><br>Comp. Thinking</td>
-                                <td><strong>23BIO112</strong><br>Intro Bio Data</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">11:35 - 12:25</td>
-                                <td><strong>23AID102</strong><br>Elements Comp 1</td>
-                                <td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td>
-                                <td><strong>22AVP103</strong><br>Mastery Mind</td>
-                                <td><strong>23PHY104</strong><br>Comp. Mech 1</td>
-                                <td><strong>23MAT106</strong><br>Maths Intel Sys</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">12:25 - 01:15</td>
-                                <td><strong>22ADM101</strong><br>Indian Heritage</td>
-                                <td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td>
-                                <td><strong>22ADM101</strong><br>Indian Heritage</td>
-                                <td><strong>23EEE103</strong><br>Elec. Eng.</td>
-                                <td>Project/Lab</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">01:15 - 02:05</td>
-                                <td colspan="5" class="break">Lunch Break</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time">02:05 - 02:55</td>
-                                <td><strong>23PHY104 (Lab)</strong><br>Comp. Mech 1</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                            </tr>
-                            <tr>
-                                <td class="slot-time" rowspan="2" style="vertical-align: middle;">02:55 - 04:35</td>
-                                <td><strong>23PHY104 (Lab)</strong></td>
-                                <td rowspan="2" style="vertical-align: middle;"><strong>23BIO112 (Lab)</strong><br>Bio Data</td>
-                                <td rowspan="2" style="vertical-align: middle;"><strong>23MAT106 (Lab)</strong><br>Maths Intel Sys</td>
-                                <td rowspan="2" style="vertical-align: middle;"><strong>23AID102 (Lab)</strong><br>Elements Comp 1</td>
-                                <td rowspan="2" style="vertical-align: middle;"><strong>23AID101 (Lab)</strong><br>Comp. Thinking</td>
-                            </tr>
-                            <tr>
-                                <td>Project/Lab</td>
-                            </tr>
+                            <tr><td class="slot-time">08:00 - 08:50</td><td colspan="5" style="color: #999; font-style: italic;">Evaluation</td></tr>
+                            <tr><td class="slot-time">08:50 - 09:40</td><td><strong>23EEE103</strong><br>Intro Elec. Eng.</td><td><strong>23PHY104</strong><br>Comp. Mech 1</td><td><strong>23AID102</strong><br>Elements Comp 1</td><td><strong>23BIO112</strong><br>Intro Bio Data</td><td><strong>23PHY104</strong><br>Comp. Mech 1</td></tr>
+                            <tr><td class="slot-time">09:40 - 10:30</td><td><strong>23MAT106</strong><br>Maths Intel Sys</td><td><strong>23AID101</strong><br>Comp. Thinking</td><td><strong>23EEE103</strong><br>Intro Elec. Eng.</td><td><strong>23MAT106</strong><br>Maths Intel Sys</td><td><strong>23AID101</strong><br>Comp. Thinking</td></tr>
+                            <tr><td class="slot-time">10:30 - 10:45</td><td colspan="5" class="break">Morning Break</td></tr>
+                            <tr><td class="slot-time">10:45 - 11:35</td><td><strong>23BIO112</strong><br>Intro Bio Data</td><td><strong>23AID102</strong><br>Elements Comp 1</td><td><strong>22AVP103</strong><br>Mastery Mind</td><td><strong>23AID101</strong><br>Comp. Thinking</td><td><strong>23BIO112</strong><br>Intro Bio Data</td></tr>
+                            <tr><td class="slot-time">11:35 - 12:25</td><td><strong>23AID102</strong><br>Elements Comp 1</td><td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td><td><strong>22AVP103</strong><br>Mastery Mind</td><td><strong>23PHY104</strong><br>Comp. Mech 1</td><td><strong>23MAT106</strong><br>Maths Intel Sys</td></tr>
+                            <tr><td class="slot-time">12:25 - 01:15</td><td><strong>22ADM101</strong><br>Indian Heritage</td><td><strong>23EEE103 (Lab)</strong><br>Elec. Eng.</td><td><strong>22ADM101</strong><br>Indian Heritage</td><td><strong>23EEE103</strong><br>Elec. Eng.</td><td>Project/Lab</td></tr>
+                            <tr><td class="slot-time">01:15 - 02:05</td><td colspan="5" class="break">Lunch Break</td></tr>
+                            <tr><td class="slot-time">02:05 - 02:55</td><td><strong>23PHY104 (Lab)</strong><br>Comp. Mech 1</td><td>Test</td><td>Test</td><td>Test</td><td>Test</td></tr>
+                            <tr><td class="slot-time" rowspan="2" style="vertical-align: middle;">02:55 - 04:35</td><td><strong>23PHY104 (Lab)</strong></td><td rowspan="2" style="vertical-align: middle;"><strong>23BIO112 (Lab)</strong><br>Bio Data</td><td rowspan="2" style="vertical-align: middle;"><strong>23MAT106 (Lab)</strong><br>Maths Intel Sys</td><td rowspan="2" style="vertical-align: middle;"><strong>23AID102 (Lab)</strong><br>Elements Comp 1</td><td rowspan="2" style="vertical-align: middle;"><strong>23AID101 (Lab)</strong><br>Comp. Thinking</td></tr>
+                            <tr><td>Project/Lab</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -640,70 +359,14 @@
             <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">Select a subject below to view detailed syllabus units and evaluation patterns.</p>
             
             <div class="grid-container">
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23MAT106</span>
-                        <h3>Maths for Intelligent Systems 1</h3>
-                        <p class="card-desc">Credits: 4 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-maths" class="btn-card">View Syllabus</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23PHY104</span>
-                        <h3>Computational Mechanics 1</h3>
-                        <p class="card-desc">Credits: 3 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-physics" class="btn-card">View Syllabus</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23AID101</span>
-                        <h3>Computational Thinking</h3>
-                        <p class="card-desc">Credits: 3 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-thinking" class="btn-card">View Syllabus</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23AID102</span>
-                        <h3>Elements of Computing 1</h3>
-                        <p class="card-desc">Credits: 3 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-elements" class="btn-card">View Syllabus</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23EEE103</span>
-                        <h3>Intro to Electrical Engineering</h3>
-                        <p class="card-desc">Credits: 3 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-eee" class="btn-card">View Syllabus</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">22AVP103</span>
-                        <h3>Mastery Over Mind</h3>
-                        <p class="card-desc">Credits: 2 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-mastery" class="btn-card">View Syllabus</a>
-                </div>
-                 <div class="grid-card">
-                    <div>
-                        <span class="course-code">22ADM101</span>
-                        <h3>Foundations of Indian Heritage</h3>
-                        <p class="card-desc">Credits: 2 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-heritage" class="btn-card">View Syllabus</a>
-                </div>
-                 <div class="grid-card">
-                    <div>
-                        <span class="course-code">23BIO112</span>
-                        <h3>Introduction to Biological Data</h3>
-                        <p class="card-desc">Credits: 3 | Semester: 1</p>
-                    </div>
-                    <a href="#curr-view-bio" class="btn-card">View Syllabus</a>
-                </div>
+                <div class="grid-card"><div><span class="course-code">23MAT106</span><h3>Maths for Intelligent Systems 1</h3><p class="card-desc">Credits: 4 | Semester: 1</p></div><a href="#curr-view-maths" class="btn-card">View Syllabus</a></div>
+                <div class="grid-card"><div><span class="course-code">23PHY104</span><h3>Computational Mechanics 1</h3><p class="card-desc">Credits: 3 | Semester: 1</p></div><a href="#curr-view-physics" class="btn-card">View Syllabus</a></div>
+                <div class="grid-card"><div><span class="course-code">23AID101</span><h3>Computational Thinking</h3><p class="card-desc">Credits: 3 | Semester: 1</p></div><a href="#curr-view-thinking" class="btn-card">View Syllabus</a></div>
+                <div class="grid-card"><div><span class="course-code">23AID102</span><h3>Elements of Computing 1</h3><p class="card-desc">Credits: 3 | Semester: 1</p></div><a href="#curr-view-elements" class="btn-card">View Syllabus</a></div>
+                <div class="grid-card"><div><span class="course-code">23EEE103</span><h3>Intro to Electrical Engineering</h3><p class="card-desc">Credits: 3 | Semester: 1</p></div><a href="#curr-view-eee" class="btn-card">View Syllabus</a></div>
+                <div class="grid-card"><div><span class="course-code">22AVP103</span><h3>Mastery Over Mind</h3><p class="card-desc">Credits: 2 | Semester: 1</p></div><a href="#curr-view-mastery" class="btn-card">View Syllabus</a></div>
+                 <div class="grid-card"><div><span class="course-code">22ADM101</span><h3>Foundations of Indian Heritage</h3><p class="card-desc">Credits: 2 | Semester: 1</p></div><a href="#curr-view-heritage" class="btn-card">View Syllabus</a></div>
+                 <div class="grid-card"><div><span class="course-code">23BIO112</span><h3>Introduction to Biological Data</h3><p class="card-desc">Credits: 3 | Semester: 1</p></div><a href="#curr-view-bio" class="btn-card">View Syllabus</a></div>
             </div>
         </div>
 
@@ -727,7 +390,6 @@
                     <h4 class="unit-title">Unit 4</h4>
                     <div class="unit-content">Introduction to quantum computing, Quantum Computing Roadmap, Quantum Mission in India, A Brief Introduction to Applications of Quantum computers, Quantum Computing Basics, Bracket Notation, Inner product, outer product, concept of state.</div>
                 </div>
-
                 <h3>Evaluation Pattern</h3>
                 <table class="eval-table">
                     <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
@@ -921,61 +583,16 @@
             </div>
         </div>
 
-
         <div id="notes" class="page-content">
             <div style="text-align: center;"><h2 class="page-title">Course Notes</h2></div>
             <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">Select a subject below to access cloud-hosted study materials.</p>
-            
             <div class="grid-container">
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23MAT106</span>
-                        <h3>Maths for Intelligent Systems 1</h3>
-                    </div>
-                    <a href="#maths-view" class="btn-card">Open Drive Links</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23PHY104</span>
-                        <h3>Computational Mechanics 1</h3>
-                    </div>
-                    <a href="#physics-view" class="btn-card">Open Drive Links</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23AID101</span>
-                        <h3>Computational Thinking</h3>
-                    </div>
-                    <a href="#thinking-view" class="btn-card">Open Drive Links</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23AID102</span>
-                        <h3>Elements of Computing 1</h3>
-                    </div>
-                    <a href="#elements-view" class="btn-card">Open Drive Links</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23EEE103</span>
-                        <h3>Intro to Electrical Engineering</h3>
-                    </div>
-                    <a href="#eee-view" class="btn-card">Open Drive Links</a>
-                </div>
-                <div class="grid-card">
-                    <div>
-                        <span class="course-code">23BIO112</span>
-                        <h3>Intro to Biological Data</h3>
-                    </div>
-                    <a href="#bio-view" class="btn-card">Open Drive Links</a>
-                </div>
-                 <div class="grid-card" style="border-top-color: #546e7a;">
-                    <div>
-                        <span class="course-code">Others</span>
-                        <h3>Heritage & Mastery</h3>
-                    </div>
-                    <a href="#others-view" class="btn-card" style="background-color: #546e7a;">Open Drive Links</a>
-                </div>
+                <div class="grid-card"><div><span class="course-code">23MAT106</span><h3>Maths for Intelligent Systems 1</h3></div><a href="#maths-view" class="btn-card">Open Drive Links</a></div>
+                <div class="grid-card"><div><span class="course-code">23PHY104</span><h3>Computational Mechanics 1</h3></div><a href="#physics-view" class="btn-card">Open Drive Links</a></div>
+                <div class="grid-card"><div><span class="course-code">23AID101</span><h3>Computational Thinking</h3></div><a href="#thinking-view" class="btn-card">Open Drive Links</a></div>
+                <div class="grid-card"><div><span class="course-code">23AID102</span><h3>Elements of Computing 1</h3></div><a href="#elements-view" class="btn-card">Open Drive Links</a></div>
+                <div class="grid-card"><div><span class="course-code">23EEE103</span><h3>Intro to Electrical Engineering</h3></div><a href="#eee-view" class="btn-card">Open Drive Links</a></div>
+                <div class="grid-card"><div><span class="course-code">23BIO112</span><h3>Intro to Biological Data</h3></div><a href="#bio-view" class="btn-card">Open Drive Links</a></div>
             </div>
         </div>
 
@@ -1012,7 +629,7 @@
         <div id="thinking-view" class="page-content">
             <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Computational Thinking Resources</h2>
+                <h2>Thinking Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -1033,7 +650,7 @@
         <div id="elements-view" class="page-content">
             <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Elements of Computing Resources</h2>
+                <h2>Elements Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes (SharePoint)</span>
@@ -1046,7 +663,7 @@
         <div id="eee-view" class="page-content">
             <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Electrical Engineering Resources</h2>
+                <h2>EEE Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -1059,7 +676,7 @@
         <div id="bio-view" class="page-content">
             <a href="#notes" class="back-btn">← Back to Notes</a>
             <div class="section-card">
-                <h2>Biological Data Resources</h2>
+                <h2>Bio Resources</h2>
                 <ul class="resource-list">
                     <li class="resource-item">
                         <span class="resource-name">Class Notes</span>
@@ -1077,79 +694,212 @@
             </div>
         </div>
 
-        <div id="others-view" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Notes</a>
-            <div class="section-card">
-                <h2>Heritage & Mastery Resources</h2>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <span class="resource-name">Links pending</span>
-                        <a href="#" class="resource-link-btn" style="background-color: #ddd; color: #777;">Pending</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link, .btn-card, .back-btn, .action-card');
-            const pageContents = document.querySelectorAll('.page-content');
+    <script type="module">
+        // 1. IMPORT FIREBASE MODULES (Using version 10 for stability)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            signInWithPopup, 
+            GoogleAuthProvider, 
+            onAuthStateChanged,
+            signOut 
+        } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { 
+            getDatabase, 
+            ref, 
+            set, 
+            onValue, 
+            onDisconnect, 
+            serverTimestamp 
+        } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-            function switchTab(targetId) {
-                // Determine if we need to update the main navigation state
-                if(targetId === '#home' || targetId === '#about' || targetId === '#timetable' || targetId === '#curriculum' || targetId === '#notes') {
-                    navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) {
-                            nav.classList.remove('active');
-                            if(nav.getAttribute('href') === targetId) nav.classList.add('active');
-                        }
-                    });
-                } else if (targetId.includes('curr-view')) {
-                     // Keep "Curriculum" active when viewing details
-                     navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
-                        if(nav.getAttribute('href') === '#curriculum') nav.classList.add('active');
-                    });
-                } else if (targetId.includes('view') && !targetId.includes('curr')) {
-                     // Keep "Notes" active when viewing note details
-                     navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
-                        if(nav.getAttribute('href') === '#notes') nav.classList.add('active');
-                    });
-                }
+        // 2. CONFIGURATION (Your specific keys)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOw0k2rN_Edruu77i-KLJcTg2Udh71H_k",
+            authDomain: "academic-protfolio.firebaseapp.com",
+            databaseURL: "https://academic-protfolio-default-rtdb.firebaseio.com",
+            projectId: "academic-protfolio",
+            storageBucket: "academic-protfolio.firebasestorage.app",
+            messagingSenderId: "1071388953994",
+            appId: "1:1071388953994:web:aaf4954e1b7ad33107cc73",
+            measurementId: "G-LKPR08GWP2"
+        };
 
-                // Hide all pages
-                pageContents.forEach(content => content.classList.remove('active'));
+        // 3. INITIALIZE FIREBASE
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
 
-                // Show target page
-                const activeContent = document.querySelector(targetId);
-                if (activeContent) activeContent.classList.add('active');
+        // 4. UI ELEMENTS
+        const loginOverlay = document.getElementById('login-overlay');
+        const loginError = document.getElementById('loginError');
+        const userStatusBar = document.getElementById('user-status-bar');
+        const currentUserDisplay = document.getElementById('currentUserDisplay');
+        const onlineCountDisplay = document.getElementById('onlineCount');
+        
+        const txtEmail = document.getElementById('txtEmail');
+        const txtPass = document.getElementById('txtPassword');
+        const btnLogin = document.getElementById('btnLogin');
+        const btnGoogle = document.getElementById('btnGoogle');
+        const btnLogout = document.getElementById('btnLogout');
+
+        // 5. AUTHENTICATION LOGIC
+
+        // Monitor Login State
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is Signed In
+                console.log("User logged in:", user.email);
+                loginOverlay.style.display = 'none';
+                userStatusBar.style.display = 'flex';
+                currentUserDisplay.innerText = user.email || user.displayName;
                 
-                window.scrollTo(0, 0);
+                // Start Presence Tracking
+                setupPresence(user);
+            } else {
+                // User is Signed Out
+                loginOverlay.style.display = 'flex';
+                userStatusBar.style.display = 'none';
+            }
+        });
+
+        // Login with Email/Password
+        btnLogin.addEventListener('click', () => {
+            const email = txtEmail.value;
+            const pass = txtPass.value;
+
+            if(!email || !pass) {
+                loginError.innerText = "Please enter both email and password.";
+                return;
             }
 
-            // Handle Clicks
-            document.body.addEventListener('click', function(e) {
-                const target = e.target.closest('a');
-                if (target && target.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = target.getAttribute('href');
-                    
-                    history.pushState(null, null, targetId);
-                    switchTab(targetId);
+            signInWithEmailAndPassword(auth, email, pass)
+                .catch((error) => {
+                    // If user not found, try creating account automatically
+                    if(error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+                        // Attempt to Create Account
+                        createUserWithEmailAndPassword(auth, email, pass)
+                            .then(() => {
+                                alert("New account created successfully!");
+                            })
+                            .catch((createErr) => {
+                                loginError.innerText = createErr.message;
+                            });
+                    } else {
+                        loginError.innerText = error.message;
+                    }
+                });
+        });
+
+        // Login with Google
+        btnGoogle.addEventListener('click', () => {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider).catch((error) => {
+                loginError.innerText = error.message;
+            });
+        });
+
+        // Logout
+        btnLogout.addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.reload();
+            });
+        });
+
+        // 6. ONLINE PRESENCE SYSTEM (Realtime Database)
+        function setupPresence(user) {
+            // Special Firebase location that checks internet connection
+            const connectedRef = ref(db, ".info/connected");
+            const userStatusRef = ref(db, "/status/" + user.uid);
+            const allUsersRef = ref(db, "/status");
+
+            onValue(connectedRef, (snap) => {
+                if (snap.val() === true) {
+                    // We are connected. 
+                    // 1. Tell DB to remove this entry if we lose connection (close tab)
+                    onDisconnect(userStatusRef).remove();
+
+                    // 2. Set our status to Online
+                    set(userStatusRef, {
+                        email: user.email || "Anonymous",
+                        last_changed: serverTimestamp(),
+                        state: "online"
+                    });
                 }
             });
 
-            function handleHashChange() {
-                const currentHash = window.location.hash || '#home';
-                switchTab(currentHash);
+            // Count how many people are online
+            onValue(allUsersRef, (snapshot) => {
+                if(snapshot.exists()) {
+                    const count = Object.keys(snapshot.val()).length;
+                    onlineCountDisplay.innerText = count;
+                } else {
+                    onlineCountDisplay.innerText = "0";
+                }
+            });
+        }
+
+        // 7. NAVIGATION LOGIC
+        // (This runs after DOM loads)
+        const navLinks = document.querySelectorAll('.nav-link, .btn-card, .back-btn, .action-card');
+        const pageContents = document.querySelectorAll('.page-content');
+
+        function switchTab(targetId) {
+            // Determine if we need to update the main navigation state
+            if(targetId === '#home' || targetId === '#about' || targetId === '#timetable' || targetId === '#curriculum' || targetId === '#notes') {
+                navLinks.forEach(nav => {
+                    if(nav.classList.contains('nav-link')) {
+                        nav.classList.remove('active');
+                        if(nav.getAttribute('href') === targetId) nav.classList.add('active');
+                    }
+                });
+            } else if (targetId.includes('curr-view')) {
+                 // Keep "Curriculum" active when viewing details
+                 navLinks.forEach(nav => {
+                    if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                    if(nav.getAttribute('href') === '#curriculum') nav.classList.add('active');
+                });
+            } else if (targetId.includes('view') && !targetId.includes('curr')) {
+                 // Keep "Notes" active when viewing note details
+                 navLinks.forEach(nav => {
+                    if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                    if(nav.getAttribute('href') === '#notes') nav.classList.add('active');
+                });
             }
 
-            window.addEventListener('popstate', handleHashChange);
-            handleHashChange();
+            // Hide all pages
+            pageContents.forEach(content => content.classList.remove('active'));
+
+            // Show target page
+            const activeContent = document.querySelector(targetId);
+            if (activeContent) activeContent.classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        document.body.addEventListener('click', function(e) {
+            const target = e.target.closest('a');
+            if (target && target.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = target.getAttribute('href');
+                history.pushState(null, null, targetId);
+                switchTab(targetId);
+            }
         });
+
+        function handleHashChange() {
+            const currentHash = window.location.hash || '#home';
+            switchTab(currentHash);
+        }
+        window.addEventListener('popstate', handleHashChange);
+        handleHashChange();
+
     </script>
 </body>
 </html>
