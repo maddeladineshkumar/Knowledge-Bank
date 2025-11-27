@@ -46,6 +46,8 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             z-index: 1000;
             box-sizing: border-box;
+            /* Hidden by default until login */
+            display: none; 
         }
 
         .site-title {
@@ -63,6 +65,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            align-items: center;
         }
 
         .nav-link {
@@ -83,11 +86,99 @@
             transform: translateY(-2px);
         }
 
+        /* Sign Out Button */
+        #logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            margin-left: 20px;
+        }
+        #logout-btn:hover {
+            background-color: #ff5252;
+            color: white;
+            border-color: #ff5252;
+        }
+
+        /* --- LOGIN OVERLAY (LOCK SCREEN) --- */
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--primary-color);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-top: 6px solid var(--accent-color);
+            color: var(--text-dark);
+        }
+
+        .login-card h2 { color: var(--primary-color); margin-top: 0; }
+        .login-card p { color: #666; font-size: 0.9rem; margin-bottom: 25px; }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+        .auth-input:focus { border-color: var(--primary-color); outline: none; }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 10px;
+        }
+        .auth-btn:hover { background-color: var(--accent-color); color: var(--text-dark); }
+        
+        .google-btn {
+            background-color: white;
+            color: #757575;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .google-btn:hover { background-color: #f1f1f1; }
+
+        .toggle-link {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+
         /* --- CONTAINER & ANIMATIONS --- */
         .container {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
+            display: none; /* Hidden by default until login */
         }
 
         .page-content {
@@ -197,10 +288,48 @@
             .action-grid { grid-template-columns: 1fr; }
             .nav-link { padding: 10px; font-size: 0.8rem; }
             .main-header { padding: 0 20px; }
+            #login-overlay { padding: 20px; box-sizing: border-box; }
+            .login-card { width: 100%; max-width: 350px; }
         }
     </style>
 </head>
 <body>
+
+    <div id="login-overlay">
+        <h1 style="color: white; margin-bottom: 20px; font-size: 1.8rem;">ACADEMIC PORTFOLIO</h1>
+        <div class="login-card">
+            
+            <div id="section-login" class="form-section active">
+                <h2>Welcome Back</h2>
+                <p>Sign in to access course materials.</p>
+                <input type="email" id="login-email" class="auth-input" placeholder="Email Address">
+                <input type="password" id="login-password" class="auth-input" placeholder="Password">
+                <button id="btn-login" class="auth-btn">Log In</button>
+                
+                <div style="display: flex; align-items: center; justify-content: center; margin: 15px 0; color: #aaa; font-size: 0.9rem;">
+                   <span style="height: 1px; background: #ddd; flex: 1; margin: 0 10px;"></span> OR <span style="height: 1px; background: #ddd; flex: 1; margin: 0 10px;"></span>
+                </div>
+
+                <button id="btn-google" class="auth-btn google-btn">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G" width="18" height="18">
+                    Sign in with Google
+                </button>
+
+                <p style="margin-top: 20px;">Don't have an account? <span class="toggle-link" onclick="switchAuth('signup')">Sign Up</span></p>
+            </div>
+
+            <div id="section-signup" class="form-section">
+                <h2>Create Account</h2>
+                <p>Register to view the portfolio.</p>
+                <input type="email" id="signup-email" class="auth-input" placeholder="Email Address">
+                <input type="password" id="signup-password" class="auth-input" placeholder="Create Password">
+                <button id="btn-signup" class="auth-btn">Sign Up</button>
+                <p style="margin-top: 20px;">Already have an account? <span class="toggle-link" onclick="switchAuth('login')">Log In</span></p>
+            </div>
+
+            <div id="message-box" style="margin-top: 15px; font-size: 0.9rem; color: #d32f2f;"></div>
+        </div>
+    </div>
 
     <header class="main-header">
         <a href="#home" class="site-title">DINESH KUMAR</a>
@@ -211,6 +340,7 @@
                 <li><a href="#timetable" class="nav-link">Schedule</a></li>
                 <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
                 <li><a href="#notes" class="nav-link">Notes</a></li>
+                <li><a href="#" class="nav-link" id="logout-btn">Sign Out</a></li>
             </ul>
         </nav>
     </header>
@@ -641,6 +771,160 @@
 
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            GoogleAuthProvider, 
+            signInWithPopup, 
+            onAuthStateChanged, 
+            signOut 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMi3zsKKrNq1NH96j3p2fPF0U9xvvLzAY",
+            authDomain: "academic-protfolio-b3dfe.firebaseapp.com",
+            projectId: "academic-protfolio-b3dfe",
+            storageBucket: "academic-protfolio-b3dfe.firebasestorage.app",
+            messagingSenderId: "57910985396",
+            appId: "1:57910985396:web:4fc0681b8581bf3bb58de1",
+            measurementId: "G-QR06NC53ZG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+        
+        // DOM Elements
+        const loginOverlay = document.getElementById('login-overlay');
+        const mainHeader = document.querySelector('.main-header');
+        const mainContainer = document.querySelector('.container');
+        const messageBox = document.getElementById('message-box');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Inputs & Buttons
+        const loginEmail = document.getElementById('login-email');
+        const loginPass = document.getElementById('login-password');
+        const btnLogin = document.getElementById('btn-login');
+        const btnGoogle = document.getElementById('btn-google');
+        
+        const signupEmail = document.getElementById('signup-email');
+        const signupPass = document.getElementById('signup-password');
+        const btnSignup = document.getElementById('btn-signup');
+
+        // --- 1. EMAIL/PASSWORD LOGIN ---
+        btnLogin.addEventListener('click', () => {
+            const email = loginEmail.value;
+            const password = loginPass.value;
+
+            if(!email || !password) {
+                messageBox.innerText = "Please enter both email and password.";
+                return;
+            }
+
+            messageBox.innerText = "Logging in...";
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in success - onAuthStateChanged will handle UI
+                    messageBox.innerText = "";
+                })
+                .catch((error) => {
+                    console.error(error);
+                    messageBox.innerText = "Login Failed: " + cleanErrorMessage(error.message);
+                });
+        });
+
+        // --- 2. SIGN UP NEW USER ---
+        btnSignup.addEventListener('click', () => {
+            const email = signupEmail.value;
+            const password = signupPass.value;
+
+            if(!email || !password) {
+                messageBox.innerText = "Please fill all fields.";
+                return;
+            }
+
+            messageBox.innerText = "Creating Account...";
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Success
+                    messageBox.innerText = "Account Created! Logging in...";
+                })
+                .catch((error) => {
+                    console.error(error);
+                    messageBox.innerText = "Signup Failed: " + cleanErrorMessage(error.message);
+                });
+        });
+
+        // --- 3. GOOGLE SIGN IN ---
+        btnGoogle.addEventListener('click', () => {
+            messageBox.innerText = "Opening Google Sign-In...";
+            signInWithPopup(auth, googleProvider)
+                .then((result) => {
+                    // Success
+                    messageBox.innerText = "";
+                }).catch((error) => {
+                    console.error(error);
+                    messageBox.innerText = "Google Sign-In Failed: " + error.message;
+                });
+        });
+
+        // --- 4. AUTH LISTENER (PROTECT SITE) ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in.
+                console.log("Logged in:", user.email);
+                loginOverlay.style.display = 'none'; // Hide login
+                mainHeader.style.display = 'flex';   // Show Nav
+                mainContainer.style.display = 'block'; // Show Content
+                
+                // Show Home Tab
+                const homeTab = document.getElementById('home');
+                if(homeTab) homeTab.classList.add('active');
+            } else {
+                // User is signed out.
+                console.log("Signed out");
+                loginOverlay.style.display = 'flex'; // Show login
+                mainHeader.style.display = 'none';
+                mainContainer.style.display = 'none';
+                messageBox.innerText = "";
+            }
+        });
+
+        // --- 5. LOGOUT ---
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => {
+                location.reload(); 
+            });
+        });
+
+        // Helper: Toggle between Login and Signup Forms
+        window.switchAuth = (mode) => {
+            const loginSec = document.getElementById('section-login');
+            const signupSec = document.getElementById('section-signup');
+            messageBox.innerText = "";
+
+            if(mode === 'signup') {
+                loginSec.classList.remove('active');
+                signupSec.classList.add('active');
+            } else {
+                signupSec.classList.remove('active');
+                loginSec.classList.add('active');
+            }
+        };
+
+        // Helper: Clean Firebase Error Messages
+        function cleanErrorMessage(msg) {
+            return msg.replace('Firebase: ', '').replace(' (auth/invalid-email).', '').replace(' (auth/wrong-password).', '').replace(' (auth/user-not-found).', '');
+        }
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('.nav-link, .btn-card, .back-btn, .action-card');
@@ -650,7 +934,7 @@
                 // Determine if we need to update the main navigation state
                 if(targetId === '#home' || targetId === '#about' || targetId === '#timetable' || targetId === '#curriculum' || targetId === '#notes') {
                     navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) {
+                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') {
                             nav.classList.remove('active');
                             if(nav.getAttribute('href') === targetId) nav.classList.add('active');
                         }
@@ -658,13 +942,13 @@
                 } else if (targetId.includes('curr-view')) {
                      // Keep "Curriculum" active when viewing details
                      navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') nav.classList.remove('active');
                         if(nav.getAttribute('href') === '#curriculum') nav.classList.add('active');
                     });
                 } else if (targetId.includes('view') && !targetId.includes('curr')) {
                      // Keep "Notes" active when viewing note details
                      navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link')) nav.classList.remove('active');
+                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') nav.classList.remove('active');
                         if(nav.getAttribute('href') === '#notes') nav.classList.add('active');
                     });
                 }
@@ -682,7 +966,7 @@
             // Handle Clicks
             document.body.addEventListener('click', function(e) {
                 const target = e.target.closest('a');
-                if (target && target.getAttribute('href').startsWith('#')) {
+                if (target && target.getAttribute('href').startsWith('#') && target.id !== 'logout-btn') {
                     e.preventDefault();
                     const targetId = target.getAttribute('href');
                     
