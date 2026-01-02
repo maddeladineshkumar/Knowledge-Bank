@@ -1,1079 +1,482 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinesh Kumar | Semester 2 Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Dinesh Kumar | Academic Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#020617', 
+                            accent: '#00f0ff',
+                            purple: '#7c3aed',
+                        }
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'typewriter': 'typewriter 2s steps(40) 1s 1 normal both',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        typewriter: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
     <style>
-        /* --- THEME VARIABLES --- */
-        :root {
-            --primary-color: #006064; /* Deep Teal */
-            --secondary-color: #455a64; /* Muted Blue-Grey */
-            --accent-color: #fbc02d; /* Mustard Gold */
-            --accent-dark: #c49000;  /* Darker Gold for depth */
-            --bg-light: #f5f7fa; /* Light Blue-Grey Background */
-            --bg-white: #ffffff;
-            --text-dark: #263238;
-            --border-color: #e0e0e0;
-            --nav-height: 70px;
+        /* --- CORE STYLES --- */
+        body { margin: 0; overflow-x: hidden; background-color: #020617; color: #fff; }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.4) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            padding-top: var(--nav-height);
-            line-height: 1.6;
-            overflow-x: hidden;
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
+        /* Canvas Background */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
 
-        /* --- NAVIGATION BAR --- */
-        .main-header {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: var(--nav-height);
-            background-color: var(--primary-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            z-index: 1000;
-            box-sizing: border-box;
-            display: none; /* Hidden until login */
-            animation: fadeIn 0.5s ease-out;
-        }
+        /* Navigation Active State */
+        .nav-link.active { color: #00f0ff; background: rgba(0, 240, 255, 0.1); }
 
-        .site-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem;
-            color: var(--accent-color);
-            font-weight: 800;
-            text-decoration: none;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .navbar ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: rgba(255,255,255,0.85);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 18px;
-            margin-left: 8px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            cursor: pointer;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--primary-color);
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        #logout-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255,255,255,0.4);
-            margin-left: 20px;
-        }
-        #logout-btn:hover {
-            background-color: #ff5252;
-            color: white;
-            border-color: #ff5252;
-        }
-
-        /* --- LOGIN OVERLAY --- */
-        #login-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--primary-color);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-            animation: fadeIn 0.5s;
-        }
-
-        .login-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            width: 350px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            border-top: 6px solid var(--accent-color);
-            color: var(--text-dark);
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .auth-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border 0.3s;
-        }
-        .auth-input:focus { border-color: var(--primary-color); outline: none; }
-
-        .auth-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 10px;
-        }
-        .auth-btn:hover { background-color: var(--accent-color); color: var(--text-dark); transform: translateY(-2px); }
-
-        .toggle-link {
-            color: var(--primary-color);
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: underline;
-        }
-
-        .form-section { display: none; }
-        .form-section.active { display: block; animation: fadeIn 0.4s; }
-
-        /* --- CONTAINER --- */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: none;
-        }
-
-        .page-content {
-            display: none;
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .page-content.active { display: block; }
-
-        .section-card {
-            background-color: var(--bg-white);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-            margin-bottom: 30px;
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: transform 0.3s ease;
-        }
-
-        /* --- HERO --- */
-        .hero-header { text-align: center; margin-bottom: 50px; }
-        .hero-title { font-size: 3.8rem; margin-bottom: 10px; color: var(--primary-color); }
-        .semester-badge { 
-            display: inline-block; 
-            background-color: #e0f7fa; 
-            color: var(--primary-color); 
-            padding: 8px 20px; 
-            border-radius: 50px; 
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            margin-bottom: 20px; 
-            border: 1px solid #b2ebf2; 
-            animation: pulse 2s infinite;
-        }
-
-        /* --- ACTION GRID --- */
-        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .action-card { 
-            background: white; padding: 40px 30px; border-radius: 16px; text-align: center; 
-            text-decoration: none; color: var(--text-dark); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: all 0.4s ease; 
-            border: 2px solid transparent; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; height: 250px; 
-        }
-        .action-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 96, 100, 0.15); border-color: var(--accent-color); }
-        .action-icon { font-size: 3rem; margin-bottom: 20px; color: var(--primary-color); }
-
-        /* --- COMING SOON --- */
-        .coming-soon-container {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        .coming-soon-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
+        /* Typing Effect Container */
+        .typewriter-container {
             display: inline-block;
-            animation: spin 4s linear infinite;
-        }
-        .construction-text {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        /* --- GRID SYSTEM (Used for Curriculum) --- */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; }
-        
-        .grid-card { 
-            background-color: var(--bg-white); border-radius: 16px; padding: 35px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.04); border-top: 6px solid var(--accent-color); 
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            display: flex; flex-direction: column; justify-content: space-between; 
-            position: relative; 
-        }
-        .grid-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0, 96, 100, 0.15); }
-        
-        /* --- NEW NOTE CARD DESIGN (Replaces Folder 3D) --- */
-        .note-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid #f0f0f0;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 220px; /* Fixed height for uniformity */
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: .15em solid #00f0ff; 
+            animation: 
+                typewriter 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
         }
 
-        .note-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 96, 100, 0.12);
-            border-color: rgba(0, 96, 100, 0.2);
-        }
-
-        /* Colored accent line at the top */
-        .note-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            opacity: 0.8;
-        }
-
-        .note-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .subject-badge {
-            background-color: #f0f7f7;
-            color: var(--primary-color);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .note-icon {
-            font-size: 1.5rem;
-            color: #eceff1;
-            transition: color 0.3s;
-        }
-        
-        .note-card:hover .note-icon {
-            color: var(--accent-color);
-        }
-
-        .note-card h3 {
-            font-size: 1.3rem;
-            margin: 0 0 10px 0;
-            color: var(--text-dark);
-            line-height: 1.4;
-        }
-
-        .note-desc {
-            font-size: 0.9rem;
-            color: #78909c;
-            margin-bottom: auto;
-        }
-
-        .access-link {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 20px;
-            color: var(--primary-color);
-            font-weight: 700;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: transform 0.2s;
-        }
-
-        .access-link:hover {
-            transform: translateX(5px);
-            color: var(--accent-dark);
-        }
-
-        .access-link span { margin-left: 8px; font-size: 1.2rem; }
-
-        /* --- SYLLABUS SPECIFIC --- */
-        .syllabus-block { margin-bottom: 30px; animation: slideUp 0.5s ease-out; }
-        .unit-title { 
-            color: var(--primary-color); border-left: 5px solid var(--accent-color); 
-            padding-left: 15px; margin-bottom: 12px; font-size: 1.25rem; 
-            background: linear-gradient(to right, #f9f9f9, transparent); 
-            padding-top: 5px; padding-bottom: 5px; 
-        }
-        .unit-content { 
-            background: #ffffff; padding: 15px; border-radius: 8px; font-size: 1rem; 
-            color: #555; border: 1px solid #eee; line-height: 1.8; text-align: justify;
-        }
-        .eval-table { width: 100%; border-collapse: collapse; margin-top: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .eval-table th, .eval-table td { border: 1px solid #ddd; padding: 15px; text-align: left; }
-        .eval-table th { background-color: var(--secondary-color); color: white; font-weight: 600; }
-
-        .back-btn { 
-            display: inline-block; margin-bottom: 25px; color: var(--secondary-color); 
-            text-decoration: none; font-weight: 700; font-size: 1rem; cursor: pointer; 
-            transition: color 0.2s; 
-        }
-        .back-btn:hover { color: var(--primary-color); }
-        
-        .btn-card { 
-            display: block; width: 100%; text-align: center; padding: 15px 0; border-radius: 8px; 
-            text-decoration: none; font-weight: 700; font-size: 1rem; 
-            background-color: var(--primary-color); color: white; transition: all 0.3s ease; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-        }
-        .btn-card:hover { background-color: var(--accent-color); color: var(--text-dark); transform: translateY(-2px); }
-        
-        /* --- PROFILE --- */
-        .profile-container { display: flex; align-items: center; gap: 60px; }
-        .profile-image-wrapper { 
-            flex: 0 0 280px; height: 280px; border-radius: 50%; overflow: hidden; 
-            border: 8px solid var(--accent-color); box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
-            transition: transform 0.4s ease; 
-        }
-        .profile-image-wrapper:hover { transform: scale(1.05); }
-        .profile-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-
-        @media (max-width: 768px) {
-            .profile-container { flex-direction: column; text-align: center; }
-            .hero-title { font-size: 2.5rem; }
-            .main-header { padding: 0 20px; }
-            .nav-link { font-size: 0.8rem; padding: 8px; }
-        }
+        @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00f0ff; } }
     </style>
 </head>
-<body>
+<body class="antialiased selection:bg-cyan-500 selection:text-white">
 
-    <div id="login-overlay">
-        <h1 style="color: white; margin-bottom: 20px; font-size: 1.8rem; letter-spacing: 2px;">ACADEMIC PORTFOLIO</h1>
-        <div class="login-card">
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="login-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#020617] transition-all duration-700">
+        <div class="relative w-full max-w-md p-10 glass rounded-3xl border border-white/5" id="login-card">
+            <div class="absolute -top-20 left-1/2 -translate-x-1/2 w-40 h-40 bg-cyan-500/20 rounded-full blur-[80px]"></div>
             
-            <div id="section-login" class="form-section active">
-                <h2>Welcome Back</h2>
-                <p style="color:#666; margin-bottom: 25px;">Sign in to access Semester 2 materials.</p>
-                <input type="text" id="login-username" class="auth-input" placeholder="Username">
-                <input type="password" id="login-password" class="auth-input" placeholder="Password">
-                <button id="btn-login" class="auth-btn">Log In</button>
-                <p style="margin-top: 20px; font-size: 0.9rem;">First time here? <span class="toggle-link" onclick="switchAuth('signup')">Create Account</span></p>
+            <div class="text-center mb-10 relative z-10">
+                <h1 class="text-3xl font-bold font-mono text-white tracking-widest">PORTFOLIO<span class="text-cyan-400">.OS</span></h1>
+                <p class="text-slate-500 text-xs uppercase tracking-[0.4em] mt-2">Secure Gateway</p>
             </div>
 
-            <div id="section-signup" class="form-section">
-                <h2>Create Account</h2>
-                <p style="color:#666; margin-bottom: 25px;">Set up your local profile.</p>
-                <input type="text" id="signup-username" class="auth-input" placeholder="Choose Username">
-                <input type="password" id="signup-password" class="auth-input" placeholder="Choose Password">
-                <button id="btn-signup" class="auth-btn">Sign Up</button>
-                <p style="margin-top: 20px; font-size: 0.9rem;">Already have an account? <span class="toggle-link" onclick="switchAuth('login')">Log In</span></p>
+            <div id="section-login" class="block relative z-10 space-y-5">
+                <input type="text" id="login-username" class="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600" placeholder="Username">
+                <input type="password" id="login-password" class="w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl px-5 py-4 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder-slate-600" placeholder="Password">
+                <button id="btn-login" class="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-cyan-900/20 transition-all transform hover:scale-[1.02]">ACCESS SYSTEM</button>
             </div>
-
-            <div id="message-box" style="margin-top: 15px; font-size: 0.9rem; color: #d32f2f; min-height: 20px;"></div>
         </div>
     </div>
 
-    <header class="main-header">
-        <a href="#home" class="site-title">DINESH KUMAR</a>
-        <nav class="navbar">
-            <ul>
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#timetable" class="nav-link">Schedule</a></li>
-                <li><a href="#curriculum" class="nav-link">Curriculum</a></li>
-                <li><a href="#notes" class="nav-link">Notes</a></li>
-                <li><a href="#" class="nav-link" id="logout-btn">Sign Out</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="container">
-
-        <div id="home" class="page-content active">
-            <div class="section-card" style="border: none; background: transparent; box-shadow: none; padding: 20px 0;">
-                <div class="hero-header">
-                    <span class="semester-badge">Semester 2 • B.Tech AIDS</span>
-                    <h1 class="hero-title">Academic <span style="color: var(--accent-color);">Portfolio</span></h1>
-                    <p style="font-size: 1.3rem; color: var(--secondary-color); max-width: 700px; margin: 0 auto;">
-                        Centralized Knowledge Repository for Artificial Intelligence & Data Science.
-                    </p>
+    <div id="main-app" class="hidden min-h-screen flex flex-col">
+        
+        <nav class="fixed top-0 w-full z-50 glass h-20 border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigate('#home')">
+                    <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                    <span class="font-mono text-lg font-bold tracking-widest text-white">DINESH<span class="text-slate-600">.DEV</span></span>
                 </div>
-
-                <div class="action-grid">
-                    <a href="#timetable" class="action-card">
-                        <div class="action-icon">📅</div>
-                        <div class="action-title">Weekly Schedule</div>
-                        <div class="action-desc">View class timings and lab slots.</div>
-                    </a>
-                    <a href="#curriculum" class="action-card">
-                        <div class="action-icon">📚</div>
-                        <div class="action-title">Curriculum</div>
-                        <div class="action-desc">Explore syllabus units and evaluation.</div>
-                    </a>
-                    <a href="#notes" class="action-card">
-                        <div class="action-icon">📂</div>
-                        <div class="action-title">Course Notes</div>
-                        <div class="action-desc">Access study materials and resources.</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="about" class="page-content">
-            <div style="text-align: center;"><h2 class="page-title" style="font-size: 2.5rem; margin-bottom: 40px;">Student Profile</h2></div>
-            <div class="section-card profile-container">
-                <div class="profile-image-wrapper">
-                    <img src="image_0.png" alt="Dinesh Kumar" onerror="this.src='https://via.placeholder.com/280x280?text=Student'">
-                </div>
-                <div class="profile-text">
-                    <h2>Hello, I'm <span style="color: var(--accent-color);">Dinesh Kumar</span></h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: #444;">
-                        I am a B.Tech student pursuing <strong>Artificial Intelligence and Data Science (AIDS)</strong> at <strong>Amrita Vishwa Vidyapeetham</strong>.
-                    </p>
-                    <p style="font-size: 1.1rem; color: #444;">
-                        Currently in my <strong>Second Semester</strong>, focusing on Core Computing, Mathematics for Intelligent Systems, and Applied Sciences.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div id="timetable" class="page-content">
-            <div class="section-card">
-                <div class="coming-soon-container">
-                    <div class="coming-soon-icon">⚙️</div>
-                    <h2 class="construction-text">Schedule Coming Soon</h2>
-                    <p>We are working on updating the timetable for Semester 2.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="notes" class="page-content">
-            <div style="text-align: center;">
-                <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Course Material</h2>
-                <p style="margin-bottom: 50px; color: #666;">Access lecture notes, PDFs, and reference materials.</p>
-            </div>
-            
-            <div class="grid-container">
                 
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23AID111</span>
-                        <div class="note-icon">💻</div>
-                    </div>
-                    <h3>Object Oriented Programming</h3>
-                    <div class="note-desc">Java, OOP Concepts, UML & Multithreading.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
+                <div class="hidden md:flex items-center gap-2 bg-slate-900/50 p-1 rounded-full border border-white/5">
+                    <a href="#home" class="nav-link px-6 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-white transition-all uppercase tracking-wider">Home</a>
+                    <a href="#about" class="nav-link px-6 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-white transition-all uppercase tracking-wider">Profile</a>
+                    <a href="#curriculum" class="nav-link px-6 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-white transition-all uppercase tracking-wider">Syllabus</a>
+                    <a href="#notes" class="nav-link px-6 py-2 rounded-full text-xs font-bold text-slate-400 hover:text-white transition-all uppercase tracking-wider">Notes</a>
                 </div>
 
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23AID112</span>
-                        <div class="note-icon">🌲</div>
-                    </div>
-                    <h3>Data Structures & Algorithms</h3>
-                    <div class="note-desc">Lists, Stacks, Queues, Trees & Graphs.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23AID113</span>
-                        <div class="note-icon">⚙️</div>
-                    </div>
-                    <h3>Elements of Computing 2</h3>
-                    <div class="note-desc">Architecture, Virtual Machines & Compilers.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23MAT112</span>
-                        <div class="note-icon">📐</div>
-                    </div>
-                    <h3>Maths for Intelligent Systems 2</h3>
-                    <div class="note-desc">Linear Algebra, Optimization & Quantum Basics.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23PHY114</span>
-                        <div class="note-icon">🔭</div>
-                    </div>
-                    <h3>Computational Mechanics 2</h3>
-                    <div class="note-desc">Solid/Fluid Mechanics & Robotics Control.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23ECE113</span>
-                        <div class="note-icon">🔋</div>
-                    </div>
-                    <h3>Intro to Electronics</h3>
-                    <div class="note-desc">Semiconductors, Transistors & Op-Amps.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">23CHY115</span>
-                        <div class="note-icon">🧪</div>
-                    </div>
-                    <h3>Materials Informatics</h3>
-                    <div class="note-desc">Material Science, Simulations & AI Applications.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">22ADM111</span>
-                        <div class="note-icon">🏛️</div>
-                    </div>
-                    <h3>Glimpses of Glorious India</h3>
-                    <div class="note-desc">Culture, Heritage & Indian Knowledge Systems.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
-                <div class="note-card">
-                    <div class="note-header">
-                        <span class="subject-badge">19ENG111</span>
-                        <div class="note-icon">📝</div>
-                    </div>
-                    <h3>Technical Communication</h3>
-                    <div class="note-desc">Professional Writing & Communication Skills.</div>
-                    <a href="#notes-soon" class="access-link">View Notes <span>&rarr;</span></a>
-                </div>
-
+                <button id="logout-btn" class="px-5 py-2 rounded-lg text-xs font-bold text-white bg-red-500/10 hover:bg-red-500 hover:text-white border border-red-500/20 transition-all">LOGOUT</button>
             </div>
-        </div>
+        </nav>
 
-        <div id="notes-soon" class="page-content">
-            <a href="#notes" class="back-btn">← Back to Folders</a>
-            <div class="section-card">
-                <div class="coming-soon-container">
-                    <div class="coming-soon-icon">🚀</div>
-                    <h2 class="construction-text">Uploading Files...</h2>
-                    <p>The notes for this subject are currently being digitized and uploaded. Please check back later.</p>
-                </div>
-            </div>
-        </div>
+        <main class="flex-grow relative z-10 pt-28 px-6 pb-12 w-full max-w-7xl mx-auto">
 
-        <div id="curriculum" class="page-content">
-            <div style="text-align: center;"><h2 style="font-size: 2.5rem; margin-bottom: 20px;">Semester 2 Syllabus</h2></div>
-            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #666;">Select a subject below to view detailed syllabus units and evaluation patterns.</p>
-            
-            <div class="grid-container">
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23AID111</span>
-                        <h3>Object Oriented Programming</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+            <section id="home" class="page-section w-full min-h-[80vh] flex flex-col justify-center items-center text-center">
+                <div class="space-y-8 animate-float">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                        <span class="text-cyan-300 font-mono text-xs tracking-[0.2em] uppercase">Semester 2 • Online</span>
                     </div>
-                    <a href="#curr-oop" class="btn-card">View Syllabus</a>
-                </div>
-
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23AID112</span>
-                        <h3>Data Structures & Algorithms</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white">
+                        <div class="typewriter-container">ACADEMIC PORTFOLIO</div>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Artificial Intelligence & Data Science <span class="text-slate-600">|</span> Amrita Vishwa Vidyapeetham
+                        <br><span class="text-sm mt-2 block text-slate-500">Centralized Knowledge Repository & Curriculum Manager</span>
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-6 pt-8">
+                        <button onclick="navigate('#curriculum')" class="group relative px-8 py-4 bg-white text-black font-bold rounded-xl overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+                            <span class="relative z-10">EXPLORE MODULES</span>
+                            <div class="absolute inset-0 bg-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                        </button>
+                        <button onclick="navigate('#notes')" class="px-8 py-4 glass text-white font-bold rounded-xl border border-white/10 hover:border-cyan-400 hover:text-cyan-400 transition-all hover:scale-105">ACCESS RESOURCES</button>
                     </div>
-                    <a href="#curr-dsa" class="btn-card">View Syllabus</a>
                 </div>
+            </section>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23AID113</span>
-                        <h3>Elements of Computing 2</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+            <section id="about" class="page-section hidden">
+                <div class="glass rounded-3xl p-8 md:p-12 border border-white/5 max-w-5xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="relative w-64 h-64 shrink-0">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-500 rounded-full blur-[40px] opacity-50 animate-pulse"></div>
+                            <img src="image_0.png" onerror="this.src='https://api.dicebear.com/7.x/micah/svg?seed=Dinesh&backgroundColor=1e293b'" class="relative w-full h-full object-cover rounded-full border-4 border-slate-800 shadow-2xl z-10">
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h2 class="text-4xl font-bold text-white mb-2">Dinesh Kumar</h2>
+                            <p class="text-cyan-400 font-mono mb-6">B.Tech AI & Data Science</p>
+                            <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                                I am currently pursuing my B.Tech in Artificial Intelligence and Data Science at Amrita Vishwa Vidyapeetham. 
+                                My academic focus lies in Core Computing, Mathematical Modeling for Intelligent Systems, and Applied Sciences.
+                            </p>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div class="p-4 bg-white/5 rounded-xl border border-white/5 text-center"><div class="text-2xl mb-1">🐍</div><div class="text-xs font-bold text-slate-500 uppercase">Python</div></div>
+                                <div class="p-4 bg-white/5 rounded-xl border border-white/5 text-center"><div class="text-2xl mb-1">☕</div><div class="text-xs font-bold text-slate-500 uppercase">Java</div></div>
+                                <div class="p-4 bg-white/5 rounded-xl border border-white/5 text-center"><div class="text-2xl mb-1">🧠</div><div class="text-xs font-bold text-slate-500 uppercase">ML/AI</div></div>
+                                <div class="p-4 bg-white/5 rounded-xl border border-white/5 text-center"><div class="text-2xl mb-1">📊</div><div class="text-xs font-bold text-slate-500 uppercase">Data</div></div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="#curr-eoc2" class="btn-card">View Syllabus</a>
                 </div>
+            </section>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23MAT112</span>
-                        <h3>Maths for Intelligent Systems 2</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+            <section id="curriculum" class="page-section hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Semester Curriculum</h2>
+                    <p class="text-slate-400">Select a course module to view detailed syllabus and evaluation metrics.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="subject-grid">
                     </div>
-                    <a href="#curr-maths" class="btn-card">View Syllabus</a>
-                </div>
+            </section>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23PHY114</span>
-                        <h3>Computational Mechanics 2</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+            <section id="syllabus-detail" class="page-section hidden">
+                <button onclick="navigate('#curriculum')" class="mb-8 flex items-center text-sm font-bold text-slate-500 hover:text-white transition-colors uppercase tracking-wider">
+                    <span class="mr-2">←</span> Back to Grid
+                </button>
+                <div class="glass rounded-3xl p-8 md:p-10 border border-white/5" id="syllabus-content">
                     </div>
-                    <a href="#curr-phy" class="btn-card">View Syllabus</a>
-                </div>
+            </section>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23ECE113</span>
-                        <h3>Introduction to Electronics</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
+            <section id="notes" class="page-section hidden">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Digital Resources</h2>
+                    <p class="text-slate-400">Access lecture notes, PDFs, and reference materials.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="notes-grid">
                     </div>
-                    <a href="#curr-ece" class="btn-card">View Syllabus</a>
-                </div>
+            </section>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">23CHY115</span>
-                        <h3>Intro to Materials Informatics</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 3</p>
-                    </div>
-                    <a href="#curr-chy" class="btn-card">View Syllabus</a>
+            <section id="notes-soon" class="page-section hidden">
+                <div class="min-h-[50vh] flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center text-4xl mb-6 animate-pulse">📂</div>
+                    <h2 class="text-3xl font-bold text-white mb-2" id="uploading-text">Upload in Progress</h2>
+                    <p class="text-slate-400 mb-8 max-w-md">The requested materials are currently being digitized and uploaded by the administrator.</p>
+                    <button onclick="window.history.back()" class="px-8 py-3 bg-slate-800 rounded-xl font-bold text-white hover:bg-slate-700 transition-all">Go Back</button>
                 </div>
+            </section>
+        </main>
 
-                <div class="grid-card">
-                    <div>
-                        <span style="color: var(--secondary-color); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">22ADM111</span>
-                        <h3>Glimpses of Glorious India</h3>
-                        <p style="color: #666; margin-bottom: 20px;">Credits: 2</p>
-                    </div>
-                    <a href="#curr-adm" class="btn-card">View Syllabus</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="curr-oop" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Object Oriented Programming (23AID111)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">Introduction to Java Language and Runtime Environment, JVM, Bytecode, Basic program syntax, Datatypes, Variables, Operators, Control statements, Loops, Arrays, Functions.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">Object-oriented concepts- Abstraction, Encapsulation, Inheritance and Polymorphism. Class and objects, Constructor functions, Class members and methods, Class Instance variables, Garbage collector, Method overloading. Basics of Inheritance, Types of Inheritance, Super keyword, Final keyword, overriding of methods, Applying and implementing interfaces, Packages-create, access and importing packages. Introduction to UML diagrams.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Introduction to exception handling, Hierarchy of exception. Usage of try, catch, throw, throws and finally. Built-in and user defined exceptions, Threads, Creating Threads, Thread lifecycle, Concept of multithreading.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 4</h4>
-                    <div class="unit-content">Applets-Applet class, Delegation event model-events, event sources, event listeners, event classes, mouse and keyboard events, JLabel, JText, JButton, JList, JCombo box.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-dsa" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Data Structures & Algorithms (23AID112)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">Data Structure primitive and non-primitive, Array data structure, properties and functions, single and multi-dimensional arrays, simple problems, Basics of Algorithm Analysis, big-Oh notation, notion of time and space complexity, dynamic arrays.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">Linked List - singly linked list, doubly linked list, circular linked list- properties and functions, implementations, Sorting algorithms selection, bubble, insertion, quick sort, merge sort, comparison of sorting algorithms, implementation using arrays.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Stack data structure, properties and functions, recursion, expression evaluation, Queue data structure - circular queue, double ended queue, properties, and functions.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 4</h4>
-                    <div class="unit-content">Binary Tree- arrays and linked list representation, tree traversals-preorder, postorder, inorder, level order. Graphs- directed and undirected graphs, adjacency list and matrices, Incidence matrices, path, graph traversals - breadth-first and depth-first, Shortest path- Dijkstra's algorithm, Bellman-Ford algorithm, Floyd-Warshall algorithm.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-eoc2" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Elements of Computing 2 (23AID113)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">Basic Computer architecture, Basic Elements of Machine Language, Hack Machine language, different sets of instructions, Hack programming, Assembly language vs Machine language, Assembler- assembly process, Hack assembly language, assembly language to binary conversions.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">Virtual Machine I: Stack Arithmetic Background, VM Specification Part-1, Implementation and Perspective, Virtual Machine II: Program Control Background, VM Specification Part-2, Implementation, Perspective, High-Level Language: Background, The Jack Language Specification, Writing Jack Applications.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Compiler I Syntax Analysis: Background, Specification, Implementation, Perspective. Compiler II - Code Generation: Background, Specification, Implementation, Perspective. Operating System: Background, the Jack OS Specification, Implementation, Perspective.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-maths" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Mathematics for Intelligent Systems 2 (23MAT112)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">Gaussian elimination - LU decomposition - Vector spaces associated with Matrices- Special orthogonal matrices Fourier Series and Fourier Transform and its properties Convolution Projection matrix and Regression Convolution sum Convolution Integral Eigenvalues and Eigenvectors of Symmetric matrices - Eigenvalues and Eigen vectors of ATA, AAT - Relationship between vector spaces associated with A, ATA, AAT- Singular Value Decomposition - Concept of Pseudoinverse- Computational experiments using MATLAB/Excel/Simulink.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">Taylor series expansion of multivariate functions-conditions for maxima, minima and saddle points-Concept of gradient and Hessian matrices- Impulse Response computations- converting higher order into first order equations concept of eAT- Multivariate regression and regularized regression Theory of convex and non-convex optimization-Newton method for unconstrained optimization- Signal processing with regularized regression- Computational experiments using MATLAB/Excel/Simulink.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Random variables and distributions - Expectation, Variance, Moments, Cumulants- Moment generating functions Sampling from univariate distribution- various methods - Bayes theorem, Concept of Jacobian, and its use in finding pdf of functions of Random variables (RVs), Box-muller formula for sampling normal distribution Concept of correlation and Covariance of two linearly related RVs.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 4</h4>
-                    <div class="unit-content">Introduction to quantum computing-Introduction to spin state vectors - Qubits - Entanglement. Measurement in Quantum Mechanics.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-phy" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Computational Mechanics 2 (23PHY114)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1: Solid Mechanics</h4>
-                    <div class="unit-content">Stress and strain analysis, Stiffness matrices and element equations, Introduction to Finite Element Method (FEM), Discretization techniques: Meshing and Grid Generation, Solving linear and nonlinear equations using FEM, Finite element analysis software overview and usage, Modeling and analysis of beams and frames.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2: Fluid Mechanics</h4>
-                    <div class="unit-content">Introduction to fluids, Conservation of mass, Conservation of momentum, Navier-Stokes equations, Introduction to Computational fluid dynamics (CFD) simulations, Flow in channels & Flow over simple 3-dimensional objects simulations.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3: Introduction to Robotics Control</h4>
-                    <div class="unit-content">Chronology of Robotic control systems, Control objectives for robotic control, Model free or Reactive control Proportional, Proportional Derivative, Proportional Integral, Proportional Integral Derviative controls. Computational aspects of reactive control for simple robotic systems.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-ece" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Introduction to Electronics (23ECE113)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1: Semiconductor Physics</h4>
-                    <div class="unit-content">Conduction in semiconductors, Doping, PN Junction, Semiconductor diodes: PN diodes, Zener diode, Rectifiers and filters, Clipping and clamping circuits, Voltage regulators.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2: Transistors</h4>
-                    <div class="unit-content">Bipolar Junction Transistor (BJT), Field Effect Transistors (FET), MOSFET, BJT amplifiers and oscillators, Transistor as a switch - Amplifiers: common amplifier configurations, voltage gain and current gain, input and output impedance, small signal analysis, frequency response, power amplifiers.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3: Operational Amplifiers (Op-Amps)</h4>
-                    <div class="unit-content">Ideal characteristics, inverting and non-inverting amplifiers, summing and difference amplifiers, integrators and differentiators, comparators, oscillators, Schmitt trigger, Multivibrators Feedback Amplifiers Oscillators - DAC and ADC.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-chy" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Introduction to Materials Informatics (23CHY115)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">Introduction to material science structure, properties, and process spaces process-structure-property linkages foundation of material informatics - introduction to molecular mechanism and force field quantification of dynamics properties of polymers (monte carlo simulation, molecular dynamics simulation, normal mode analysis) electronics structure of atoms (Gaussian, Gauss view, density functional theory).</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">Quantification and screening of materials properties - property prediction and optimization using Al materials design and discovery using AI - how to handle small, spared, and low-quality dataset using AI.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Materials failure and sustainability analysis new material and inverse materials design concept - solve inverse design using AI - enhance speed, efficacy and cost-effectiveness of material using AI - basic concept of quantum computing in material informatics.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 4</h4>
-                    <div class="unit-content">Case studies of materials informatics (use of AI) in different fields (e.g. energy, aerospace, biomedical, etc.) - ethical considerations and limitations of materials informatics future directions and challenges in materials informatics.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Assignments (min 2)</td><td>Internal</td><td>30</td></tr>
-                    <tr><td>Quizzes (min 2)</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Mid-Term Examination</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>Term Project / End Sem</td><td>External</td><td>30</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="curr-adm" class="page-content">
-            <a href="#curriculum" class="back-btn">← Back to Curriculum</a>
-            <div class="section-card">
-                <h2>Glimpses of Glorious India (22ADM111)</h2>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 1</h4>
-                    <div class="unit-content">To the World from India; Education System in India; Insights from Mahabharata; Human Personality. India's Scientific System for Personality Refinement.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 2</h4>
-                    <div class="unit-content">The Vedas: An Overview; One God, Many Forms; Bhagavad Gita - The Handbook for Human Life; Examples of Karma Yoga in Modern India.</div>
-                </div>
-                <div class="syllabus-block">
-                    <h4 class="unit-title">Unit 3</h4>
-                    <div class="unit-content">Chanakya's Guidelines for Successful Life; Role of Women; Conservations with Amma.</div>
-                </div>
-                <h3>Evaluation Pattern</h3>
-                <table class="eval-table">
-                    <tr><th>Assessment</th><th>Internal/External</th><th>Weightage (%)</th></tr>
-                    <tr><td>Periodical 1</td><td>Internal</td><td>15</td></tr>
-                    <tr><td>Periodical 2</td><td>Internal</td><td>15</td></tr>
-                    <tr><td>Continuous Assessment</td><td>Internal</td><td>20</td></tr>
-                    <tr><td>End Semester</td><td>External</td><td>50</td></tr>
-                </table>
-            </div>
-        </div>
-
+        <footer class="mt-auto py-8 text-center text-slate-600 text-xs font-mono border-t border-white/5 relative z-10 glass">
+            <p>DESIGNED & DEVELOPED BY DINESH KUMAR © 2026</p>
+        </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- DOM ELEMENTS ---
-            const loginOverlay = document.getElementById('login-overlay');
-            const mainHeader = document.querySelector('.main-header');
-            const container = document.querySelector('.container');
-            const messageBox = document.getElementById('message-box');
-            const logoutBtn = document.getElementById('logout-btn');
-            
-            const btnLogin = document.getElementById('btn-login');
-            const btnSignup = document.getElementById('btn-signup');
-            const loginUser = document.getElementById('login-username');
-            const loginPass = document.getElementById('login-password');
-            const signupUser = document.getElementById('signup-username');
-            const signupPass = document.getElementById('signup-password');
+        // --- DATA ---
+        const subjects = [
+            { code: '23AID111', title: 'Object Oriented Programming', credits: 3, icon: '💻', id: 'curr-oop', color: 'from-blue-600 to-cyan-500' },
+            { code: '23AID112', title: 'Data Structures & Algorithms', credits: 3, icon: '🌲', id: 'curr-dsa', color: 'from-emerald-600 to-teal-500' },
+            { code: '23AID113', title: 'Elements of Computing 2', credits: 3, icon: '⚙️', id: 'curr-eoc2', color: 'from-orange-600 to-red-500' },
+            { code: '23MAT112', title: 'Maths for Intelligent Systems 2', credits: 3, icon: '📐', id: 'curr-maths', color: 'from-violet-600 to-purple-500' },
+            { code: '23PHY114', title: 'Computational Mechanics 2', credits: 3, icon: '🔭', id: 'curr-phy', color: 'from-indigo-600 to-blue-500' },
+            { code: '23ECE113', title: 'Introduction to Electronics', credits: 3, icon: '🔋', id: 'curr-ece', color: 'from-yellow-500 to-orange-500' },
+            { code: '23CHY115', title: 'Materials Informatics', credits: 3, icon: '🧪', id: 'curr-chy', color: 'from-teal-600 to-green-500' },
+            { code: '22ADM111', title: 'Glorious India', credits: 2, icon: '🏛️', id: 'curr-adm', color: 'from-pink-600 to-rose-500' },
+            { code: '19ENG111', title: 'Technical Communication', credits: 3, icon: '📝', id: 'curr-eng', color: 'from-gray-600 to-slate-500' }
+        ];
 
-            // --- NAVIGATION LOGIC ---
-            const navLinks = document.querySelectorAll('.nav-link, .btn-card, .back-btn, .action-card, .access-link');
-            const pageContents = document.querySelectorAll('.page-content');
+        const syllabusData = {
+            'curr-oop': {
+                title: 'Object Oriented Programming (23AID111)',
+                units: [
+                    { t: 'Unit 1', c: 'Introduction to Java Language and Runtime Environment, JVM, Bytecode, Basic program syntax, Datatypes, Variables, Operators, Control statements, Loops, Arrays, Functions.'},
+                    { t: 'Unit 2', c: 'Object-oriented concepts- Abstraction, Encapsulation, Inheritance and Polymorphism. Class and objects, Constructor functions, Class members and methods, Class Instance variables, Garbage collector, Method overloading. Basics of Inheritance, Types of Inheritance, Super keyword, Final keyword, overriding of methods, Applying and implementing interfaces, Packages-create, access and importing packages. Introduction to UML diagrams.'},
+                    { t: 'Unit 3', c: 'Introduction to exception handling, Hierarchy of exception. Usage of try, catch, throw, throws and finally. Built-in and user defined exceptions, Threads, Creating Threads, Thread lifecycle, Concept of multithreading.'},
+                    { t: 'Unit 4', c: 'Applets-Applet class, Delegation event model-events, event sources, event listeners, event classes, mouse and keyboard events, JLabel, JText, JButton, JList, JCombo box.'}
+                ],
+                eval: [ {a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'} ]
+            },
+            'curr-dsa': {
+                title: 'Data Structures & Algorithms (23AID112)',
+                units: [
+                    { t: 'Unit 1', c: 'Data Structure primitive and non-primitive, Array data structure, properties and functions, single and multi-dimensional arrays, simple problems, Basics of Algorithm Analysis, big-Oh notation, notion of time and space complexity, dynamic arrays.'},
+                    { t: 'Unit 2', c: 'Linked List - singly linked list, doubly linked list, circular linked list- properties and functions, implementations, Sorting algorithms selection, bubble, insertion, quick sort, merge sort, comparison of sorting algorithms, implementation using arrays.'},
+                    { t: 'Unit 3', c: 'Stack data structure, properties and functions, recursion, expression evaluation, Queue data structure - circular queue, double ended queue, properties, and functions.'},
+                    { t: 'Unit 4', c: 'Binary Tree- arrays and linked list representation, tree traversals-preorder, postorder, inorder, level order. Graphs- directed and undirected graphs, adjacency list and matrices, Incidence matrices, path, graph traversals - breadth-first and depth-first, Shortest path- Dijkstra\'s algorithm, Bellman-Ford algorithm, Floyd-Warshall algorithm.'}
+                ],
+                eval: [ {a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'} ]
+            },
+            'curr-eoc2': { title: 'Elements of Computing 2', units: [{t:'Unit 1', c:'Basic Computer architecture, Basic Elements of Machine Language, Hack Machine language, different sets of instructions, Hack programming, Assembly language vs Machine language, Assembler- assembly process, Hack assembly language, assembly language to binary conversions.'}, {t:'Unit 2', c:'Virtual Machine I: Stack Arithmetic Background, VM Specification Part-1, Implementation and Perspective, Virtual Machine II: Program Control Background, VM Specification Part-2, Implementation, Perspective, High-Level Language: Background, The Jack Language Specification, Writing Jack Applications.'}, {t:'Unit 3', c:'Compiler I Syntax Analysis: Background, Specification, Implementation, Perspective. Compiler II - Code Generation: Background, Specification, Implementation, Perspective. Operating System: Background, the Jack OS Specification, Implementation, Perspective.'}], eval: [{a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'}] },
+            'curr-maths': { title: 'Maths for Intelligent Systems 2', units: [{t:'Unit 1', c:'Gaussian elimination - LU decomposition - Vector spaces associated with Matrices- Special orthogonal matrices Fourier Series and Fourier Transform and its properties Convolution Projection matrix and Regression Convolution sum Convolution Integral Eigenvalues and Eigenvectors of Symmetric matrices - Eigenvalues and Eigen vectors of ATA, AAT - Relationship between vector spaces associated with A, ATA, AAT- Singular Value Decomposition - Concept of Pseudoinverse- Computational experiments using MATLAB/Excel/Simulink.'}, {t:'Unit 2', c:'Taylor series expansion of multivariate functions-conditions for maxima, minima and saddle points-Concept of gradient and Hessian matrices- Impulse Response computations- converting higher order into first order equations concept of eAT- Multivariate regression and regularized regression Theory of convex and non-convex optimization-Newton method for unconstrained optimization- Signal processing with regularized regression- Computational experiments using MATLAB/Excel/Simulink.'}, {t:'Unit 3', c:'Random variables and distributions - Expectation, Variance, Moments, Cumulants- Moment generating functions Sampling from univariate distribution- various methods - Bayes theorem, Concept of Jacobian, and its use in finding pdf of functions of Random variables (RVs), Box-muller formula for sampling normal distribution Concept of correlation and Covariance of two linearly related RVs.'}, {t:'Unit 4', c:'Introduction to quantum computing-Introduction to spin state vectors - Qubits - Entanglement. Measurement in Quantum Mechanics.'}], eval: [{a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'}] },
+            'curr-phy': { title: 'Computational Mechanics 2', units: [{t:'Unit 1: Solid Mechanics', c:'Stress and strain analysis, Stiffness matrices and element equations, Introduction to Finite Element Method (FEM), Discretization techniques: Meshing and Grid Generation, Solving linear and nonlinear equations using FEM, Finite element analysis software overview and usage, Modeling and analysis of beams and frames.'}, {t:'Unit 2: Fluid Mechanics', c:'Introduction to fluids, Conservation of mass, Conservation of momentum, Navier-Stokes equations, Introduction to Computational fluid dynamics (CFD) simulations, Flow in channels & Flow over simple 3-dimensional objects simulations.'}, {t:'Unit 3: Introduction to Robotics Control', c:'Chronology of Robotic control systems, Control objectives for robotic control, Model free or Reactive control Proportional, Proportional Derivative, Proportional Integral, Proportional Integral Derviative controls. Computational aspects of reactive control for simple robotic systems.'}], eval: [{a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'}] },
+            'curr-ece': { title: 'Introduction to Electronics', units: [{t:'Unit 1: Semiconductor Physics', c:'Conduction in semiconductors, Doping, PN Junction, Semiconductor diodes: PN diodes, Zener diode, Rectifiers and filters, Clipping and clamping circuits, Voltage regulators.'}, {t:'Unit 2: Transistors', c:'Bipolar Junction Transistor (BJT), Field Effect Transistors (FET), MOSFET, BJT amplifiers and oscillators, Transistor as a switch - Amplifiers: common amplifier configurations, voltage gain and current gain, input and output impedance, small signal analysis, frequency response, power amplifiers.'}, {t:'Unit 3: Operational Amplifiers (Op-Amps)', c:'Ideal characteristics, inverting and non-inverting amplifiers, summing and difference amplifiers, integrators and differentiators, comparators, oscillators, Schmitt trigger, Multivibrators Feedback Amplifiers Oscillators - DAC and ADC.'}], eval: [{a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'}] },
+            'curr-chy': { title: 'Intro to Materials Informatics', units: [{t:'Unit 1', c:'Introduction to material science structure, properties, and process spaces process-structure-property linkages foundation of material informatics - introduction to molecular mechanism and force field quantification of dynamics properties of polymers (monte carlo simulation, molecular dynamics simulation, normal mode analysis) electronics structure of atoms (Gaussian, Gauss view, density functional theory).'}, {t:'Unit 2', c:'Quantification and screening of materials properties - property prediction and optimization using Al materials design and discovery using AI - how to handle small, spared, and low-quality dataset using AI.'}, {t:'Unit 3', c:'Materials failure and sustainability analysis new material and inverse materials design concept - solve inverse design using AI - enhance speed, efficacy and cost-effectiveness of material using AI - basic concept of quantum computing in material informatics.'}, {t:'Unit 4', c:'Case studies of materials informatics (use of AI) in different fields (e.g. energy, aerospace, biomedical, etc.) - ethical considerations and limitations of materials informatics future directions and challenges in materials informatics.'}], eval: [{a: 'Assignments (min 2)', w: '30'}, {a: 'Quizzes (min 2)', w: '20'}, {a: 'Mid-Term Examination', w: '20'}, {a: 'Term Project / End Sem', w: '30'}] },
+            'curr-adm': { title: 'Glimpses of Glorious India', units: [{t:'Unit 1', c:'To the World from India; Education System in India; Insights from Mahabharata; Human Personality. India\'s Scientific System for Personality Refinement.'}, {t:'Unit 2', c:'The Vedas: An Overview; One God, Many Forms; Bhagavad Gita - The Handbook for Human Life; Examples of Karma Yoga in Modern India.'}, {t:'Unit 3', c:'Chanakya\'s Guidelines for Successful Life; Role of Women; Conservations with Amma.'}], eval: [{a: 'Periodical 1', w: '15'}, {a: 'Periodical 2', w: '15'}, {a: 'Continuous Assessment', w: '20'}, {a: 'End Semester', w: '50'}] },
+            'curr-eng': { 
+                title: 'Technical Communication (19ENG111)', 
+                units: [
+                    { t: 'Unit 1', c: 'Mechanics of Writing: Grammar rules -articles, tenses, auxiliary verbs (primary & modal) prepositions, subject-verb agreement, pronoun-antecedent agreement, discourse markers and sentence linkers. General Reading and Listening comprehension – rearrangement & organization of sentences.'},
+                    { t: 'Unit 2', c: 'Different kinds of written documents: Definitions- descriptions- instructions-recommendations- user manuals – reports – proposals. Formal Correspondence: Writing formal Letters. Mechanics of Writing: impersonal passive & punctuation. Scientific Reading & Listening Comprehension.'},
+                    { t: 'Unit 3', c: 'Technical paper writing: documentation style – document editing – proof reading – Organising and formatting. Mechanics of Writing: Modifiers, phrasal verbs, tone and style, graphical representation. Reading and listening comprehension of technical documents. Mini Technical project (10 -12 pages) Technical presentations.'}
+                ], 
+                eval: [ 
+                    {a: 'Periodical 1', w: '15'},
+                    {a: 'Periodical 2', w: '15'},
+                    {a: 'Continuous Assessment (Lab/Workbook)', w: '40'},
+                    {a: 'End Semester Examination', w: '30'} 
+                ] 
+            }
+        };
 
-            function switchTab(targetId) {
-                // Prevent navigation for "Coming Soon" sections that are placeholders
-                if (targetId === '#timetable') {
-                    // Just show the specific page content which contains the "Coming Soon" message
-                }
+        // --- RENDER FUNCTIONS ---
+        function renderCurriculum() {
+            const grid = document.getElementById('subject-grid');
+            grid.innerHTML = subjects.map(s => `
+                <div onclick="navigate('#${s.id}')" class="glass-card p-8 rounded-2xl cursor-pointer group relative overflow-hidden" data-tilt data-tilt-scale="1.02">
+                    <div class="absolute inset-0 bg-gradient-to-br ${s.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 text-xs font-mono font-bold text-slate-400 border border-slate-700 rounded-full group-hover:text-white group-hover:border-white/30 transition-all">${s.code}</span>
+                        <span class="text-3xl filter grayscale group-hover:grayscale-0 transition-all duration-300 transform group-hover:scale-110">${s.icon}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 leading-tight group-hover:translate-x-1 transition-transform">${s.title}</h3>
+                    <div class="flex items-center text-sm text-slate-500 mt-4">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-600 group-hover:bg-cyan-400 mr-2 transition-colors"></span>
+                        ${s.credits} Credits
+                    </div>
+                </div>
+            `).join('');
+            VanillaTilt.init(document.querySelectorAll(".glass-card"));
+        }
 
-                // Handle Navbar Active States
-                if(targetId === '#home' || targetId === '#about' || targetId === '#timetable' || targetId === '#curriculum' || targetId === '#notes') {
-                    navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') {
-                            nav.classList.remove('active');
-                            if(nav.getAttribute('href') === targetId) nav.classList.add('active');
-                        }
-                    });
-                } else if (targetId.includes('curr-')) {
-                      // Keep "Curriculum" active when viewing sub-pages
-                      navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') nav.classList.remove('active');
-                        if(nav.getAttribute('href') === '#curriculum') nav.classList.add('active');
-                    });
-                } else if (targetId.includes('notes-')) {
-                      // Keep "Notes" active when viewing sub-pages
-                      navLinks.forEach(nav => {
-                        if(nav.classList.contains('nav-link') && nav.id !== 'logout-btn') nav.classList.remove('active');
-                        if(nav.getAttribute('href') === '#notes') nav.classList.add('active');
-                    });
-                }
+        function renderNotes() {
+            const grid = document.getElementById('notes-grid');
+            grid.innerHTML = subjects.map(s => `
+                <div onclick="openNotes('${s.title}')" class="glass-card p-6 rounded-2xl cursor-pointer group relative hover:border-cyan-500/30 transition-colors" data-tilt>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl group-hover:bg-cyan-500 group-hover:text-white transition-all">${s.icon}</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white leading-tight">${s.title}</h4>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-wider mt-1">${s.code} • Files Pending</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            VanillaTilt.init(document.querySelectorAll(".glass-card"));
+        }
 
-                // Transition Pages
-                pageContents.forEach(content => content.classList.remove('active'));
-                const activeContent = document.querySelector(targetId);
-                if (activeContent) {
-                    activeContent.classList.add('active');
-                    window.scrollTo(0, 0);
-                }
+        function renderSyllabusDetail(id) {
+            const data = syllabusData[id];
+            if(!data) return;
+
+            const content = document.getElementById('syllabus-content');
+            content.innerHTML = `
+                <div class="mb-10">
+                    <h2 class="text-3xl font-bold text-white mb-2">${data.title}</h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div class="lg:col-span-2 space-y-6">
+                        ${data.units.map(u => `
+                            <div class="relative pl-6 border-l-2 border-slate-700 hover:border-cyan-500 transition-colors py-1 group">
+                                <h4 class="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">${u.t}</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">${u.c}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div>
+                        <div class="bg-slate-900/50 rounded-xl p-6 border border-white/5">
+                            <h3 class="text-white font-bold mb-6 flex items-center"><span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span> Evaluation</h3>
+                            <div class="space-y-4">
+                                ${data.eval.map(e => `
+                                    <div class="flex justify-between items-center text-sm border-b border-white/5 pb-2 last:border-0">
+                                        <span class="text-slate-400">${e.a}</span>
+                                        <span class="font-mono font-bold text-white">${e.w}%</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- NAVIGATION ---
+        function navigate(targetId) {
+            // Handle sub-routes
+            if (targetId.startsWith('#curr-') && targetId !== '#curriculum') {
+                renderSyllabusDetail(targetId.replace('#', ''));
+                targetId = '#syllabus-detail';
             }
 
-            // Click Handler
-            document.body.addEventListener('click', function(e) {
-                const target = e.target.closest('a');
-                if (target && target.getAttribute('href').startsWith('#') && target.id !== 'logout-btn') {
-                    e.preventDefault();
-                    const targetId = target.getAttribute('href');
-                    history.pushState(null, null, targetId);
-                    switchTab(targetId);
-                }
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.add('hidden');
+                el.style.opacity = '0';
             });
-
-            // Handle Back/Forward Browser Buttons
-            window.addEventListener('popstate', () => {
-                const currentHash = window.location.hash || '#home';
-                switchTab(currentHash);
-            });
-
-            // --- STATIC AUTHENTICATION LOGIC ---
             
-            // Check if user is already logged in
+            // Remove active nav states
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+            // Show target
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.classList.remove('hidden');
+                // Animation
+                gsap.fromTo(target, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+                
+                // Update Nav
+                let navId = targetId;
+                if(targetId === '#syllabus-detail') navId = '#curriculum';
+                if(targetId === '#notes-soon') navId = '#notes';
+                
+                const navLink = document.querySelector(`a[href="${navId}"]`);
+                if(navLink) navLink.classList.add('active');
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // --- NOTES LOGIC ---
+        function openNotes(subjectName) {
+            document.getElementById('uploading-text').innerText = "Uploading " + subjectName + " Files...";
+            navigate('#notes-soon');
+        }
+
+        // --- AUTH ---
+        function initAuth() {
             if (localStorage.getItem('isLoggedIn') === 'true') {
-                showMainContent();
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-app').classList.remove('hidden');
+                navigate('#home');
             }
 
-            // 1. Sign Up
-            btnSignup.addEventListener('click', () => {
-                const user = signupUser.value.trim();
-                const pass = signupPass.value.trim();
-
-                if (!user || !pass) {
-                    showMessage("Please fill in all fields.");
-                    return;
-                }
-
-                // Store credentials locally
-                localStorage.setItem('storedUser', user);
-                localStorage.setItem('storedPass', pass);
-                
-                showMessage("Account created! Please Log In.", "green");
-                setTimeout(() => switchAuth('login'), 1500);
+            document.getElementById('btn-login').addEventListener('click', () => {
+                localStorage.setItem('isLoggedIn', 'true');
+                gsap.to('#login-overlay', { opacity: 0, duration: 0.5, onComplete: () => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.getElementById('main-app').classList.remove('hidden');
+                    navigate('#home');
+                }});
             });
 
-            // 2. Log In
-            btnLogin.addEventListener('click', () => {
-                const user = loginUser.value.trim();
-                const pass = loginPass.value.trim();
-                
-                const storedUser = localStorage.getItem('storedUser');
-                const storedPass = localStorage.getItem('storedPass');
-
-                if (!user || !pass) {
-                    showMessage("Please enter username and password.");
-                    return;
-                }
-
-                if (user === storedUser && pass === storedPass) {
-                    // Success
-                    localStorage.setItem('isLoggedIn', 'true');
-                    showMainContent();
-                } else {
-                    showMessage("Invalid Credentials. Please try again.");
-                }
-            });
-
-            // 3. Logout
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            document.getElementById('logout-btn').addEventListener('click', () => {
                 localStorage.removeItem('isLoggedIn');
                 location.reload();
             });
+        }
 
-            // Helper: Toggle Auth Forms
-            window.switchAuth = (mode) => {
-                document.getElementById('section-login').classList.remove('active');
-                document.getElementById('section-signup').classList.remove('active');
-                messageBox.innerText = "";
-                
-                if(mode === 'signup') {
-                    document.getElementById('section-signup').classList.add('active');
-                } else {
-                    document.getElementById('section-login').classList.add('active');
-                }
-            };
+        // --- THREE.JS BACKGROUND ---
+        function initThreeJS() {
+            const canvas = document.getElementById('bg-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Particles
+            const geometry = new THREE.BufferGeometry();
+            const count = 1000;
+            const posArray = new Float32Array(count * 3);
+            for(let i=0; i<count*3; i++) posArray[i] = (Math.random()-0.5) * 15;
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const material = new THREE.PointsMaterial({ size: 0.02, color: 0x00f0ff, transparent: true, opacity: 0.5 });
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            camera.position.z = 4;
 
-            function showMainContent() {
-                loginOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    loginOverlay.style.display = 'none';
-                    mainHeader.style.display = 'flex';
-                    container.style.display = 'block';
-                    
-                    // Initialize view
-                    const currentHash = window.location.hash || '#home';
-                    switchTab(currentHash);
-                }, 500);
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.y += 0.001;
+                particles.rotation.x += 0.0005;
+                renderer.render(scene, camera);
             }
+            animate();
 
-            function showMessage(msg, color = "#d32f2f") {
-                messageBox.style.color = color;
-                messageBox.innerText = msg;
-            }
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCurriculum();
+            renderNotes();
+            initThreeJS();
+            initAuth();
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash || '#home';
+                navigate(hash);
+            });
         });
     </script>
 </body>
